@@ -1,0 +1,2674 @@
+/**
+ * Theme Name: The One
+ * Theme URI: http://frosty.media/theme/the-one
+ * Author: Austin Passy
+ * Author URI: http://austin.passy.co/
+ * Description: A photo-centric theme. Features include: site color settings, custom menus, header image / color / opacity control, custom background option, smart bottom widgets area adjusting layout to number of active sidebars, threaded commenting, customized media player styles and integrated social network sharing / bookmarking links.
+ * Version: 1.1.0
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: the-one
+ * Tags: one-column, responsive-layout, custom-header, custom-background, custom-colors, custom-menu, featured-images, threaded-comments, translation-ready
+ * GitHub Theme URI: https://github.com/thefrosty/The-One-Theme
+ * GitHub Branch: master
+ */
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Reset
+2.0 Typography
+3.0 Elements
+4.0 Forms
+5.0 Links & Navigation
+6.0 Accessibility
+7.0 Alignments
+8.0 Clearings
+9.0 Widgets
+10.0 Content
+	10.1 Posts and Pages
+	10.2 Singular Posts and Pages
+	10.3 Comments
+11.0 Media
+	11.1 Captions
+	11.2 Galleries
+12.0 Layout
+13.0 Style Groups
+14.0 Jetpack
+
+Responsive CSS
+	- min-width: 720px
+	- min-width: 980px
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+1.0 Reset
+--------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+	transition: all 0.3s ease-in-out;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+	overflow-y: scroll;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	background: #fafafa; /* Fallback for when there is no custom background color defined. */
+	word-wrap: break-word;
+}
+
+body[direction="ltr"] {direction: ltr;}
+body[direction="rtl"] {direction: rtl;}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+	display: block;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+table { /* tables still need 'cellspacing="0"' in the markup */
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+caption,
+th,
+td {
+	font-weight: normal;
+	text-align: left;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+}
+
+blockquote,
+q {
+	quotes: "" "";
+}
+
+a:hover,
+a:active,
+a:focus {
+	outline: 0;
+}
+
+a img {
+	border: 0;
+}
+
+/*--------------------------------------------------------------
+2.0 Typography
+--------------------------------------------------------------*/
+
+/* === Icon font === */
+
+.note:before,
+.alert:before,
+.download:before,
+.open-button:before,
+.open-button::after,
+.close-button:before,
+.close-button::after,
+.nav li a:before,
+.nav li a::after,
+.cat-links:before,
+.tags-links:before,
+.edit-content a:before,
+.comment-time a:before,
+.comment-reply-link:before,
+.comment-reply-login:before,
+#cancel-comment-reply-link:before,
+.comment-form-author label:before,
+.comment-form-email label:before,
+.comment-form-url label:before,
+.comment-form-comment label:before,
+.search-form label:before {
+	display: inline-block;
+	font-family: "FontAwesome", serif;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	line-height: inherit;
+	text-decoration: none;
+	text-transform: none;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	color: rgba(0,0,0,0.8);
+	font-family: 'PT Serif', Georgia, serif;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-style: normal;
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+
+h1 {
+	font-size: 1.8em;
+	line-height: 1.3;
+}
+h2 {
+	font-size: 1.4em;
+	line-height: 1.3;
+}
+h3 {
+	font-size: 1.2em;
+	line-height: 1.4;
+}
+h4 {font-size: 1.0em;}
+h5 {font-size: 0.8em;}
+h6 {font-size: 0.6em;}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn,
+cite,
+em,
+i {
+	font-style: italic;
+}
+
+blockquote {
+	border-left: 4px solid #d64431;
+	font-size: 1em;
+	font-weight: normal;
+	line-height: 1.5;
+	margin: 0 0 1.75em;
+	padding: 1em 1.5em;
+}
+	blockquote > :last-child {
+		margin-bottom: 0;
+	}
+
+address {
+	font-style: italic;
+	margin: 0 0 1.5em;
+}
+
+pre,
+table pre,
+.form-allowed-tags code {
+	background: rgba(0,0,0,0.03);
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	display: block;
+	margin-bottom: 1.75em;
+	max-width: 100%;
+	overflow: auto;
+	padding: 1em;
+	word-wrap: break-word;
+}
+
+	pre code {
+		background: transparent;
+		}
+
+code,
+kbd,
+tt,
+var {
+	background: rgba(0,0,0,0.05);
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #999;
+	cursor: help;
+}
+
+mark,
+ins {
+	background: #fff9c0;
+	text-decoration: none;
+}
+
+sup,
+sub {
+	font-size: 75%;
+	height: 0;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	bottom: 1ex;
+}
+
+sub {
+	top: .5ex;
+}
+
+small {
+	font-size: 75%;
+}
+
+big {
+	font-size: 125%;
+}
+
+/* === Extra Div/Paragraph Style */
+
+.note,
+.alert,
+.download {
+	background: #fff;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 0.3em;
+	box-shadow: 0 0 8px rgba(0,0,0,0.05);
+	clear: both;
+	float: left;
+	margin-bottom: 1.75em;
+	padding: 1.25em 1.75em;
+	padding-left: 4em;
+	position: relative;
+	width: 100%;
+}
+
+	/* Icons */
+
+	.note:before,
+	.alert:before,
+	.download:before {
+		background: #fff;
+		border: 0.2em solid rgba(0,0,0,0.05);
+		border-radius: 100%;
+		color: rgba(0,0,0,0.5);
+		content: '\f129';
+		height: 2em;
+		line-height: 1.8;
+		position: absolute;
+			top: 1em;
+			left: 1em;
+		text-align: center;
+		width: 2em;
+	}
+	.note:before {
+		border-color: #3397d4;
+		color: #3397d4;
+	}
+	.alert:before {
+		border-color: #d64431;
+		color: #d64431;
+		content: '\f12a';
+	}
+	.download:before {
+		border-color: #7cd433;
+		color: #7cd433;
+		content: '\f019';
+	}
+
+	/* Margin rule for children */
+	.note > :last-child,
+	.alert > :last-child,
+	.download > :last-child {
+		margin-bottom: 0;
+	}
+
+/*--------------------------------------------------------------
+3.0 Elements
+--------------------------------------------------------------*/
+hr {
+	background-color: rgba(0,0,0,0.05);
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.75em;
+}
+
+/* === Lists === */
+
+ul,
+ol {
+	list-style-position: inside;
+	margin: 0 0 1.5em 2.4em;
+}
+
+	li > ul,
+	li > ol {
+		margin-bottom: 0;
+		margin-left: 1.5em;
+	}
+
+ul {
+	list-style-type: disc;
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin: 0 1.5em 1.5em;
+}
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+}
+
+figure {
+	margin: 0;
+}
+
+/* === Tables === */
+table {
+	border: 6px solid rgba(0,0,0,0.02);
+	border-bottom: 5px solid rgba(0,0,0,0.02);
+	margin: 0 0 1.75em;
+	width: 100%;
+}
+
+	table caption {
+		background: rgba(0,0,0,0.07);
+		margin-bottom: 1px;
+		padding: 0.8em;
+		text-align: center;
+	}
+
+	th {
+		font-weight: bold;
+	}
+
+	th,
+	td {
+		border-bottom: 1px solid rgba(0,0,0,0.02);
+		padding: 0.3em 0.6em;
+	}
+
+/*--------------------------------------------------------------
+4.0 Forms
+--------------------------------------------------------------*/
+
+fieldset {
+	border: 2px solid rgba(0,0,0,0.1);
+	margin: 0 0 1.75em;
+	padding: 1.5em 1.5em 0;
+}
+
+legend {
+	border: 2px solid rgba(0,0,0,0.1);
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	padding: 0.25em 0.6em;
+	text-transform: uppercase;
+}
+
+label {
+	cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+	color: inherit;
+	font-size: 100%; /* Corrects font size not being inherited in all browsers */
+	margin: 0 0 0.25em; /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
+	transition: all 0.3s ease-in-out;
+	vertical-align: baseline; /* Improves appearance and consistency in all browsers */
+}
+
+/* Focused State */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	z-index: 1;
+	}
+
+/* === Input Types === */
+
+input[type="checkbox"],
+input[type="radio"] {
+	padding: 0; /* Addresses excess padding in IE8/9 */
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] +label {
+	padding-left: 0.25em;
+}
+
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+textarea,
+select {
+	background: rgba(0,0,0,0.025);
+	border: 0;
+	border-radius: 2px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+	padding: 0.5em 0.75em;
+}
+
+textarea {
+	overflow: auto; /* Removes default vertical scrollbar in IE6/7/8/9 */
+	vertical-align: top; /* Improves readability and alignment in all browsers */
+	width: 100%;
+}
+
+/* === Button === */
+.button,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+		-webkit-appearance: none; /* Corrects inability to style clickable 'input' types in iOS */
+	background-clip: padding-box;
+		-webkit-background-clip: padding;
+		-moz-background-clip: padding;
+		-ms-background-clip: padding-box;
+		-o-background-clip: padding-box;
+	background: #d64431;
+	border: 0;
+	border-radius: 2px;
+	box-shadow: none;
+	color: #fff;
+	cursor: pointer; /* Improves usability and consistency of cursor style between image-type 'input' and others */
+	display: inline-block;
+	padding: 0.5em 0.75em;
+	transition: all 0.3s ease-in-out;
+}
+
+/* === Button Hover === */
+.button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+.button:focus,
+button:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus {
+	background: #000;
+}
+
+/* Disabled state */
+button[disabled],
+input[disabled],
+input.disabled,
+select[disabled],
+select[disabled] option,
+select[disabled] optgroup,
+textarea[disabled],
+textarea.disabled {
+	color: rgba(0,0,0,0.25);
+	cursor: default;
+	user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	}
+
+input[type="search"] { /* Addresses appearance set to searchfield in S5, Chrome */
+	-webkit-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button { /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
+	-webkit-appearance: none;
+}
+
+input[type="file"]:focus,
+input[type="file"]:active,
+input[type="radio"]:focus,
+input[type="radio"]:active,
+input[type="checkbox"]:focus,
+input[type="checkbox"]:active {
+	box-shadow: none;
+	}
+
+input:invalid {
+	color: #d00;
+}
+
+/* Reset Firefox browser spacing rules */
+button::-moz-focus-inner,
+input::-moz-focus-inner,
+select::-moz-focus-inner,
+textarea::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+/* Place holders, cannot combine placeholder rules or they will be ignored completely */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+	color: inherit;
+	opacity: 1;
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+	color: inherit;
+	opacity: 1;
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+	/* Older versions of Firefox */
+	color: inherit;
+	opacity: 1;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+	color: inherit;
+	opacity: 1;
+}
+
+/* === Search Form === */
+
+.search-form {
+	line-height: 1.5;
+	margin-bottom: 1.5em;
+	position: relative;
+}
+	.search-form label {
+		display: block;
+	}
+		/* search icon */
+		.search-form label:before {
+			background: rgba(0,0,0,0.03);
+			border-radius: 0 2px 2px 0;
+			content: '\f002';
+			display: block;
+			height: 2.5em;
+			line-height: 2.5;
+			position: absolute;
+				top: 0;
+				right: 0;
+			text-align: center;
+			width: 2.5em;
+		}
+
+		/* search field */
+		.search-form .search-field {
+			padding-right: 3em;
+			width: 100%;
+		}
+
+	/* search submit */
+	.search-form .search-submit {
+		background: transparent;
+		border-radius: 0 2px 2px 0;
+		color: transparent;
+		height: 2.5em;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+			top: 0;
+			right: 0;
+		width: 2.5em;
+		}
+		.search-form .search-submit:hover,
+		.search-form .search-submit:focus {
+			background: rgba(0,0,0,0.05);
+		}
+
+/* === Search form within certain areas === */
+
+.search-wrap {
+	margin-bottom: 1.5em;
+}
+	.search-wrap .search-form {
+		font-size: 1.6rem; /* Search form sizing within .search-wrap is dependent on the font size. */
+		margin-bottom: 0;
+	}
+
+/* Search form at Top of Primary menu */
+#nav-primary .search-wrap {
+	/*
+	 * This wrap container is present only when the search form is inserted via customizer
+	 * settings and at the top of primary menu space. Primary menu has a fixed width and
+	 * limited horizontal space at the top, therefore we want the `.search-wrap` at 75%.
+	*/
+	margin-bottom: 0;
+	width: 75%;
+}
+		#nav-primary .search-field {
+			/* darken the search field to increase contrast with light text color */
+			background: rgba(0,0,0,0.8);
+		}
+#nav-primary .menu-items + .search-wrap {
+	width: 100%;
+}
+
+/*
+ * Search form at Top of Footer
+ */
+
+.site-footer .search-wrap {
+	padding: 2% 2% 0;
+}
+	.site-footer .search-form {
+		margin: 0 auto;
+		max-width: 62%;
+	}
+
+/*--------------------------------------------------------------
+5.0 Links & Navigation
+--------------------------------------------------------------*/
+
+/* Links */
+a {
+	color: #d64431;
+	text-decoration: none;
+}
+
+/* Hover state for some selected links */
+.entry a:hover,
+.entry a:focus,
+.comments-area a:hover,
+.comments-area a:focus,
+.widget a:hover,
+.widget a:focus,
+.site-info a:hover,
+.site-info a:focus {
+	box-shadow: inset 0 -2px 0 #d64431;
+	}
+
+/*
+The following are links that shouldn't inherit the hover state above.
+The `#page` parent selector is used to override inline CSS added
+by WordPress customizer so regardless of what theme settings
+for custom CSS are set to, the following links will stay the same.
+You can still customize these via the child theme style sheet.
+*/
+#page .button:hover,
+#page .button:focus,
+#page .img-hyperlink:hover,
+#page .img-hyperlink:focus,
+#page .featured-media:hover,
+#page .featured-media:focus,
+#page .nav-next a,
+#page .nav-previous a,
+#page .edit-content a:hover,
+#page .edit-content a:focus,
+#page .page-links a:hover,
+#page .page-links a:focus,
+#page .mejs-controls a:hover,
+#page .mejs-controls a:focus,
+#page .wp-playlist-tracks a:hover,
+#page .wp-playlist-tracks a:focus,
+#page .comment-meta a:hover,
+#page .comment-meta a:focus {
+	box-shadow: none;
+}
+
+/* === Menu Icons === */
+.nav li a[href*="behance.net"]:before {content: '\f1b4';}
+.nav li a[href*="digg.com"]:before {content: '\f1a6';}
+.nav li a[href*="dribbble.com"]:before {content: '\f17d';}
+.nav li a[href*="dropbox.com"]:before {content: '\f16b';}
+.nav li a[href*="facebook.com"]:before {content: '\f09a';}
+.nav .nav-rss > a:before,
+.nav .nav-feed > a:before,
+.nav .nav-subscribe > a:before,
+.nav li a[href*="/feed"]:before {content: '\f09e';}
+.nav li a[href*="flickr.com"]:before {content: '\f16e';}
+.nav li a[href*="github.com"]:before {content: '\f092';}
+.nav .nav-home > a:before {content: '\f015';}
+.nav li a[href*="instagram.com"]:before {content: '\f16d';}
+.nav li a[href*="last.fm"]:before {content: '\f202';}
+.nav .nav-contact > a:before,
+.nav li a[href*="mailto:"]:before {content: '\f0e0';}
+.nav li a[href*="linkedin.com"]:before {content: '\f0e1';}
+.nav li a[href*="pinterest.com"]:before {content: '\f0d2';}
+.nav li a[href*="plus.google.com"]:before {content: '\f0d5';}
+.nav li a[href*="reddit.com"]:before {content: '\f1a1';}
+.nav .nav-search > a:before {content: '\f002';}
+.nav li a[href*="soundcloud.com"]:before {content: '\f1be';}
+.nav li a[href*="spotify.com"]:before {content: '\f1bc';}
+.nav li a[href*="stackexchange.com"]:before {content: '\f18d';}
+.nav li a[href*="stackoverflow.com"]:before {content: '\f16c';}
+.nav li a[href*="steampowered.com"]:before {content: '\f1b6';}
+.nav li a[href*="stumbleupon.com"]:before {content: '\f1a4';}
+.nav li a[href*="tumblr.com"]:before {content: '\f173';}
+.nav li a[href*="twitter.com"]:before {content: '\f099';}
+.nav .nav-user > a:before {content: '\f007';}
+.nav li a[href*="vimeo.com"]:before {content: '\f194';}
+.nav li a[href*="vine.com"]:before {content: '\f1ca';}
+.nav li a[href*="weibo.com"]:before {content: '\f18a';}
+.nav li a[href*="wordpress.org"]:before {content: '\f19a';}
+.nav li a[href*="xing.com"]:before {content: '\f168';}
+.nav li a[href*="yelp.com"]:before {content: '\f1e9';}
+.nav li a[href*="youtube.com"]:before {content: '\f167';}
+
+/* === Global Menu Styles === */
+.nav {
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+	/* Links in general */
+	.nav a {color: inherit;}
+
+	/* Menu list */
+
+		.nav ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			word-spacing: -5px;
+		}
+			.nav li {
+				word-spacing: 0;
+			}
+			.nav li,
+			.nav li a {
+				position: relative;
+			}
+
+/* === Menu Toggle === */
+.open-button,
+.close-button {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	color: inherit;
+	cursor: pointer;
+	font-family: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	text-shadow: none;
+}
+
+/* === Menu Primary (off canvas) === */
+.nav.offcanvas {
+	/* do not assign anything visual to this container
+	that isn't meant to be inherited by its child */
+	color: rgba(255,255,255,0.5);
+	height: 100%;
+	line-height: 1.5;
+ 	margin-right: -300px;
+	position: absolute;
+		top: 0;
+		right: 0;
+	text-align: left;
+	transition: all 0.35s;
+	width: 300px;
+	z-index: 999;
+}
+
+	/*
+	 * Usually, all styles are applied to buttons, but not these buttons.
+	 * They serve other purposes so apply their styles to their relative :before and :after.
+	 */
+	.nav.offcanvas .open-button,
+	.nav.offcanvas .close-button {
+		-webkit-backface-visibility: hidden;
+		background: transparent;
+		color: transparent;
+		height: 4rem;
+		overflow: hidden;
+		position: absolute;
+			top: 0;
+		transition: all 0s;
+		width: 4rem;
+	}
+
+		/* Button icons */
+		.nav.offcanvas .open-button:before,
+		.nav.offcanvas .close-button:before {
+			background: #d64431;
+			color: #fff;
+			content: '\f0c9';
+			font-size: 2rem;
+			line-height: 2;
+			overflow: hidden;
+			padding: 0;
+			text-align: center;
+			transition: all 0.3s;
+			width: 4rem;
+		}
+
+		/* Button icons hover/focus/ states */
+		.nav.offcanvas .open-button:hover:before,
+		.nav.offcanvas .open-button:focus:before {
+			background: rgba(0,0,0,0.5);
+		}
+		.nav.offcanvas .close-button:hover:before,
+		.nav.offcanvas .close-button:focus:before {
+			background: rgba(255,255,255,0.5);
+		}
+
+	/*
+	 * Open button
+	 *
+	 * First, it serves as a reference point for the `.open-button:before` icon
+	 * to position itself. Then it acts as a page mask.
+	 * @see `.nav.offcanvas.show-menuz .open-button`
+	 */
+	.nav.offcanvas .open-button {
+		left: 0;
+		margin-left: -4rem;
+	}
+		/* Open button icon */
+		.nav.offcanvas .open-button:before {
+			border-radius: 0 0 0 3px;
+		}
+
+	/*
+	 * Close button
+	 *
+	 * Acts as empty container and reference point for `.close-button:before`
+	 */
+	.nav.offcanvas .close-button {
+		height: 4rem;
+		margin: 0 1.7rem 0 0;
+		overflow: hidden;
+		right: 0;
+		width: 4rem;
+	}
+		/* Close button icon */
+ 		.nav.offcanvas .close-button:before {
+			border-radius: 0 0 3px 3px;
+			content: '\f00d';
+		}
+
+	/* Begin actual Menu Primary starting with wrapper div */
+	.nav.offcanvas .wrap {
+		background: #111;
+		font-size: 1.6rem;
+		height: 100%;
+		overflow: auto;
+		padding: 10%;
+	}
+
+		/* Links in general */
+		.nav.offcanvas a {
+			color: rgba(255,255,255,0.8);
+		}
+		.nav.offcanvas a:hover,
+		.nav.offcanvas a:focus,
+		.nav.offcanvas .current-menu-item > a {
+			color: #d64431;
+		}
+
+		/* Menu items container */
+		.nav.offcanvas .wrap > ul {
+			margin-bottom: 1.75em;
+		}
+			/* Top level items only */
+			.nav.offcanvas .wrap > ul > li {
+				border-bottom: 1px dotted rgba(255,255,255,0.08);
+				padding: 1rem 0;
+			}
+				/* Item links */
+				.nav.offcanvas li a {
+					display: block;
+				}
+				/* Item links hover/focused/current state */
+				.nav.offcanvas li a:hover,
+				.nav.offcanvas li a:focus,
+				.nav.offcanvas .current-menu-item > a {
+					box-shadow: inset 3px 0 0 #d64431;
+					padding-left: 1.2em;
+				}
+					/* Item link icon (if any exists) */
+					.nav.offcanvas li a:before {
+						width: 2.4rem;
+					}
+
+			/* === Menu Primary Child Items ===*/
+			.nav.offcanvas ul ul {
+				border-left: 1px dotted rgba(255,255,255,0.1);
+				margin: 0.62em 0;
+				padding-left: 1.5em;
+			}
+					.nav.offcanvas li li a {
+						font-size: 1.4rem;
+						line-height: 1.5;
+					}
+
+/* === Menu Primary (on canvas) === */
+.nav.offcanvas.show-menu {
+	margin-right: 0;
+	position: fixed;
+	transition: all 0.3s;
+	z-index: 100001; /* higher than WordPress `.admin-bar` 99999 z-index */
+}
+
+	/*
+	 * The open-button now covers the entire screen like a mask, except for areas where
+	 * menu links are displayed. The menu closes when the mask is clicked.
+	*/
+	.nav.offcanvas.show-menu .open-button {
+		background: rgba(0,0,0,0.4);
+		height: 100%;
+		position: fixed;
+		margin: 0;
+		transition: height 0s, width 0.3s;
+		width: 100%;
+		z-index: -1;
+	}
+		.nav.offcanvas.show-menu .open-button:before {
+			display: none;
+		}
+
+/* === Menu Social (social media links) === */
+.nav.social {
+	font-size: 1.8em;
+	padding: 2%;
+}
+		.nav.social ul {
+			word-spacing: 0;
+		}
+			.nav.social li {
+				display: inline-block;
+				margin: 0.32em 0;
+				vertical-align: top;
+			}
+				/* hide link item texts */
+				.nav.social li a {
+					border-radius: 3px;
+					box-shadow: inset 0 0 0 1px rgba(0,0,0,0.07);
+					display: block;
+					height: 2.5em;
+					overflow: hidden;
+					width: 2.5em;
+				}
+				.nav.social li a:hover,
+				.nav.social li a:focus {
+					box-shadow: inset 0 0 0 1px #d64431;
+					color: #d64431;
+				}
+					/* social media icons */
+					.nav.social li a:before {
+						display: block;
+						line-height: 2.5;
+						text-align: center;
+						width: 2.5em;
+					}
+
+/* === Menu Secondary (contains dropdowns) === */
+.nav.dropdown {
+	font-size: 1.2rem;
+	padding: 2% 2% 0;
+	position: relative;
+	text-align: center;
+	z-index: 2;
+	transition: all 0.35s
+}
+	/* Menu Toggle */
+	.nav.dropdown .open-button {
+		background: transparent;
+		display: inline-block;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		margin-bottom: 1.5em;
+		text-transform: uppercase;
+	}
+	.nav.dropdown .open-button:hover,
+	.nav.dropdown .open-button:focus {
+		color: #d64431;
+	}
+
+		/* Toggle Icon: Open */
+		.nav.dropdown .open-button::after {
+			content: '\f0d7';
+			text-align: right;
+			width: 2rem;
+		}
+		/* Toggle Icon: Close */
+		.nav.dropdown.show-menu .open-button::after {
+			content: '\f0d8';
+		}
+
+		/* Hide menu items cotnainer by default */
+		.nav.dropdown .wrap > ul {
+			max-height: 0;
+			overflow: hidden;
+			transition: all 0.8s cubic-bezier(.26,.45,.74,.87);
+		}
+		/* Show container when toggle button's clicked on */
+		.nav.dropdown.show-menu .wrap > ul {
+			box-shadow: 0 0 0 6px rgba(0,0,0,0.02);
+			margin-bottom: 1.5em;
+			max-height: 10000px;
+			transition: max-height 7s cubic-bezier(.26,.45,.74,.87);
+		}
+			/* Menu items */
+			.nav.dropdown li {
+				text-align: left;
+			}
+				/* === Item parent links ===*/
+				.nav.dropdown li a {
+					background: #fff;
+					border-bottom: 1px solid rgba(0,0,0,0.02);
+					display: block;
+					font-size: 1.6rem;
+					padding: 0.4em 0.8em; /* make space on the right for absolute position icon */
+					position: relative;
+				}
+				/* Item links hover/focused/current state */
+				.nav.dropdown li a:hover,
+				.nav.dropdown li a:focus,
+				.nav.dropdown .current-menu-item > a {
+					box-shadow: inset 3px 0 0 #d64431;
+					color: #d64431;
+					padding-left: 1.6em;
+				}
+					/* Item link style icon (if any exists) */
+					.nav.dropdown li a:before {
+						width: 2.4rem;
+					}
+
+				/* === Child items === */
+					.nav.dropdown ul ul {
+						border-left: 1px solid rgba(0,0,0,0.03);
+						margin-left: 1.5em;
+					}
+
+/* === Site Pagination === */
+
+.paging-navigation,
+.post-navigation,
+.comment-navigation,
+#page #infinite-handle {
+	clear: both;
+	margin-bottom: 1.75em;
+	padding: 2% 2% 0;
+	text-align: center;
+}
+
+.paging-navigation,
+#page #infinite-handle {
+	padding-top: 4%;
+}
+
+.comment-navigation {
+	padding: 0;
+}
+
+	.paging-navigation .nav-links,
+	.post-navigation .nav-links,
+	.comment-navigation .nav-links,
+	#page #infinite-handle span {
+		border-radius: 4em;
+		border: 4px solid rgba(0,0,0,0.02);
+		display: inline-block;
+		font-size: 0.8em;
+		letter-spacing: 0.08em;
+		text-align: left;
+		text-transform: uppercase;
+		word-spacing: -5px;
+	}
+
+		.paging-navigation .nav-links *,
+		.post-navigation .nav-links *,
+		.comment-navigation .nav-links * {
+			word-spacing: 0;
+		}
+		.paging-navigation a,
+		.post-navigation a,
+		.comment-navigation a {
+			color: inherit;
+		}
+
+		.paging-navigation a:hover,
+		.paging-navigation a:focus,
+		.post-navigation a:hover,
+		.post-navigation a:focus,
+		.comment-navigation a:hover,
+		.comment-navigation a:focus {
+			box-shadow: none;
+			color: #d64431;
+		}
+
+		.paging-navigation .nav-previous,
+		.paging-navigation .nav-next,
+		.post-navigation .nav-previous,
+		.post-navigation .nav-next,
+		.comment-navigation .nav-previous,
+		.comment-navigation .nav-next,
+		#page #infinite-handle span {
+			display: inline-block;
+			padding: 0.7em 1.8em;
+			vertical-align: middle;
+		}
+
+		.nav-previous:empty,
+		.nav-next:empty {
+			display: none;
+		}
+
+		.paging-navigation .nav-previous + .nav-next {
+			border-left: 4px solid rgba(0,0,0,0.02)
+		}
+
+/* === Post Navigation === */
+
+/* Although `.post-navigation` styles are grouped with `.paging-navigation` above, Post Navigation displays longer phrases so adjust for that on small  screens then imitate `.paging-navigation` 100% on medium and large screens.. */
+	.post-navigation .nav-links {
+		border-radius: 0;
+		display: block;
+	}
+
+		.post-navigation .nav-previous,
+		.post-navigation .nav-next {
+			display: block;
+		}
+
+		.post-navigation .nav-previous + .nav-next {
+			border-top: 4px solid rgba(0,0,0,0.02)
+		}
+
+/*--------------------------------------------------------------
+6.0 Accessibility
+--------------------------------------------------------------*/
+/* Text meant only for screen readers */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar */
+}
+
+/*--------------------------------------------------------------
+7.0 Alignments
+--------------------------------------------------------------*/
+.alignleft {
+	float: left;
+	margin-right: 1.5em;
+}
+
+.alignright {
+	float: right;
+	margin-left: 1.5em;
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+img.alignleft,
+img.alignright { /* See "Style Groups" for more alignment rules */
+	margin-bottom: 1.5em;
+}
+
+/*--------------------------------------------------------------
+8.0 Clearings
+--------------------------------------------------------------*/
+.clear:before,
+.clear:after,
+.entry-content:before,
+.entry-content:after,
+.comment-content:before,
+.comment-content:after,
+.site-header:before,
+.site-header:after,
+.site-content:before,
+.site-content:after,
+.site-footer:before,
+.site-footer:after {
+	content: "";
+	display: table;
+}
+
+.clear:after,
+.entry-content:after,
+.comment-content:after,
+.site-header:after,
+.site-content:after,
+.site-footer:after {
+	clear: both;
+}
+
+/*--------------------------------------------------------------
+9.0 Widgets
+--------------------------------------------------------------*/
+
+	.widget-title {
+		font-size: 0.857em;
+		font-weight: normal;
+		letter-spacing: 0.08em;
+		margin-bottom: 1.5em;
+		text-transform: uppercase;
+	}
+
+	/* List Widgets */
+
+	.widget ul{
+		margin: 0 0 1.5em;
+		padding: 0;
+	}
+		.widget li > ul {
+			margin: 0 0 0 1.5em;
+		}
+
+	/* Make sure select elements fit in widgets */
+	.widget select {
+		max-width: 100%;
+		}
+	.widget_archive select,
+	.widget_categories select {
+		margin-bottom: 1.75em;
+	}
+
+	/* RSS widget */
+
+	.widget_rss .widget-title .rsswidget {
+		color: inherit;
+	}
+	.widget_rss .rsswidget.img-hyperlink {
+		display: inline-block;
+		vertical-align: middle;
+	}
+		.widget_rss .widget-title img {
+			height: auto;
+			width: 1em;
+		}
+
+	.widget_rss ul {
+		list-style: none;
+	}
+		.widget_rss ul li {
+			margin-bottom: 1.5em;
+		}
+			.widget_rss .rss-date,
+			.widget_rss cite {
+				color: rgba(0,0,0,0.5);
+				display: block;
+				font-size: 0.9em;
+				font-style: normal;
+				font-weight: normal;
+			}
+
+	/* Tag Cloud widget */
+
+	.widget .tagcloud {
+		margin-bottom: 1.5em;
+	}
+
+/*--------------------------------------------------------------
+10.0 Content
+--------------------------------------------------------------*/
+
+.site-main {
+	font-size: 1.4rem;
+}
+
+.page-header,
+.page-title,
+.taxonomy-description {
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+.page-header,
+.singular .entry-header {
+	margin-bottom: 1.5em;
+	padding: 2% 2% 0;
+	text-align: center;
+}
+	.page-title,
+	.singular .entry-title {
+		letter-spacing: -0.03em;
+		padding-left: 12%;
+		padding-right: 12%;
+		margin: 0;
+	}
+	.taxonomy-description {
+		padding-top: 1.5em;
+	}
+		.taxonomy-description > :last-child {
+			margin-bottom: 0;
+		}
+
+/* === Share links === */
+
+.share.base {
+	text-align: center;
+}
+		.share.base li{
+			float: none;
+		}
+
+.entry ~ .share.bottom,
+.entry ~ .share.side {
+	margin-top: 1.5em;
+}
+
+.infinite-scroll .entry ~ .share.bottom,
+.infinite-scroll .entry ~ .share.side {
+	margin-bottom: 0;
+}
+
+.entry-content .share.side {
+	margin-top: 2%;
+}
+
+/*--------------------------------------------------------------
+10.1 Posts and pages
+--------------------------------------------------------------*/
+
+.sticky {}
+
+/* Do not display multiple time stamps */
+.posted-on time {
+	display: none;
+}
+.posted-on .entry-date {
+	display: inline;
+}
+
+/* === Edit link === */
+.edit-content {
+	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 3;
+}
+	.edit-content a {
+		background: #d64431;
+		color: transparent;
+		display: block;
+		height: 2em;
+		overflow: hidden;
+		width: 2em;
+	}
+	.singular .edit-content a {
+		border-radius: 3px;
+	}
+	.edit-content a:hover,
+	.edit-content a:focus {
+		background: rgba(0,0,0,0.5);
+	}
+		.edit-content a:before {
+			color: #fff;
+			content: '\f040';
+			line-height: 2;
+			margin: 0;
+			text-align: center;
+			width: 2em;
+		}
+
+/* === Main content container === */
+.entry {
+	display: inline-block;
+	padding: 2%;
+	position: relative;
+	vertical-align: top;
+	width: 100%;
+}
+
+	/* === Entry Preview (for non-singular use) === */
+	.preview {
+		background: #fff;
+		box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+		overflow: hidden;
+		padding: 3%;
+		position: relative;
+	}
+	.preview:hover {
+		box-shadow: 0 0 15px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.15);
+	}
+
+		/* === Post Thumbnail === */
+		.featured-media,
+			.featured-media img {
+			display: block;
+			overflow: hidden;
+			width: 100%;
+		}
+
+		.featured-media {
+			background: #d64431;
+		}
+
+			/* by default, a blank place holder image is used as featured thumb at 20% opacity  */
+			.featured-media img {
+				opacity: 0.2;
+				transition: all .6s cubic-bezier(.26,.45,.74,.87);
+			}
+
+			/* if has thumbnail, replace placeholder with thumbnail and display at 100% opacity */
+			.has-post-thumbnail .featured-media img {opacity: 1;}
+
+			/* on hover, zoom in and rotate thumbnail with opacity at 20% */
+			.has-post-thumbnail .preview:hover .featured-media img,
+			.has-post-thumbnail .featured-media:hover img,
+			.has-post-thumbnail .featured-media:focus img {
+				opacity: 0.2;
+ 				transform: rotate(8deg) scale(1.2);
+					-ms-transform: rotate(8deg) scale(1.2);
+			}
+
+		/* === Preview's overlaying elements === */
+		.preview .overlay {
+			background: transparent;
+			color: #fff;
+			overflow: hidden;
+			padding: 3%;
+			position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+			text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+			z-index: 2;
+		}
+		.has-post-thumbnail .preview .overlay {opacity: 0;}
+		.has-post-thumbnail .preview:hover .overlay {opacity: 1;}
+
+			/* Preview header */
+			.preview .entry-header {
+				padding: 6% 6% 0;
+			}
+
+				/* links */
+				.entry .preview a {
+					color: inherit;
+					}
+				.entry .preview a:hover,
+				.entry .preview a:focus {
+					box-shadow: inset 0 -6px 0 rgba(0,0,0,0.2)
+				}
+
+				/* title */
+				.preview .entry-title {
+					font-size: 1.5em;
+					font-weight: bold;
+					line-height: 1.3;
+					margin-bottom: 0.5em;
+				}
+
+				/* meta */
+				.preview .entry-meta {
+					font-size: 1.2rem;
+					letter-spacing: 0.08em;
+					line-height:1.6;
+					margin-bottom: 1em;
+					text-transform: uppercase;
+				}
+					.preview .posted-on, .preview .byline {
+						display: block;
+					}
+
+			.preview .entry-summery {
+				padding: 0 6%;
+			}
+
+			.preview .edit-content {
+				margin: 3% 3% 0 0;
+			}
+
+/*--------------------------------------------------------------
+10.2 Singular Posts and Pages
+--------------------------------------------------------------*/
+
+.singular .entry {
+	padding: 0;
+	position: relative;
+}
+
+	/* === Single Entry Header, see `.page-header` === */
+
+		.singular .entry-meta {
+			font-style: italic;
+			font-size: 0.8em;
+		}
+
+		.singular .entry-title + .entry-meta {
+			padding-top: 1.2em;
+		}
+
+	/* === Single Entry Content === */
+
+	.singular .entry-content,
+	.page-content,
+	.singular .entry-footer {
+		padding: 2% 2% 0;
+		position: relative;
+	}
+
+	/* === Single Entry Footer === */
+
+	.singular .entry-footer {
+		margin-bottom: 1.5em;
+		padding-bottom: 0;
+		position: static; /* this is necessary for the Edit Link to position itself relative to the grandparent container */
+		text-align: center;
+	}
+
+		.singular .entry-footer > span {
+			display: block;
+		}
+
+			/* === Icons === */
+
+			/* Category link */
+			.singular .cat-links:before,
+			.singular .tags-links:before {
+				color: rgba(0,0,0,0.2);
+				content: '\f07c';
+				margin-right: 0.4em;
+			}
+			/* Tags link */
+			.singular .tags-links:before {
+				content: '\f02c';
+			}
+
+/* === Page Links === */
+
+.page-links {
+	clear: both;
+	margin: 0 0 1.5em;
+}
+	.page-links a {
+		border: 2px solid rgba(0,0,0,0.02);
+		display: inline-block;
+		margin: 0 0.125em 0.25em;
+		padding: 0.25em 0.75em;
+	}
+	.page-links a:hover,
+	.page-links a:focus {
+		border-color: #d64431;
+	}
+
+/*--------------------------------------------------------------
+10.3 Comments
+--------------------------------------------------------------*/
+
+.comments-area {
+	padding: 2%;
+}
+
+	.no-comments,
+	.comments-title {
+		clear: both;
+	}
+
+	.comments-title {
+		font-weight: normal;
+		padding: 0 5%;
+		text-align: center;
+	}
+
+	/* === Comment List === */
+	.comment-list,
+	.comments-area .children {
+		list-style: none;
+		margin: 0;
+	}
+
+		.comment-list > li,
+		.comments-area .children > li {
+			margin: 0;
+		}
+
+			/* === Comment body === */
+
+				.comment-meta {
+					background: rgba(0,0,0,0.025);
+					padding-left: 3.25em;
+					padding-right: 0.75em;
+					position: relative;
+				}
+				.pingback .comment-meta,
+				.trackback .comment-meta {
+					padding-left: 0.75em;
+				}
+				/* byposauthor */
+				.bypostauthor .comment-meta {
+					background: #fff;
+				}
+
+					/* General links */
+					.comment-meta a {
+						color: inherit;
+					}
+					.comment-meta a:hover,
+					.comment-meta a:focus {
+						color: #d64431;
+					}
+
+					/* vcard */
+
+					.comment-author {
+						display: inline-block;
+					}
+						.comment-author .avatar {
+							box-shadow: inset -1px 0 0 #fafafa;
+							float: left;
+							height: 2.5em;
+							margin-left: -3.25em;
+							overflow: hidden; /* hide alt text */
+							padding: 0.5em;
+							width: 2.5em;
+						}
+						.comment-author cite {
+							display: inline-block;
+							font-style: normal;
+							margin-right: 0.75em;
+							padding: 0.5em 0;
+							vertical-align: top;
+						}
+
+					/* Meta data */
+					.comment-metadata{
+						display: inline-block;
+						line-height: 2.5;
+						vertical-align: top;
+					}
+						.comment-time,
+						.edit-comment {
+							display: inline-block;
+							line-height: 1.5;
+							margin: 0 0.75em 0 0;
+							text-transform: uppercase;
+						}
+							.comment-time a,
+							.edit-comment a{
+								color: rgba(0,0,0,0.3);
+								font-size: 0.8em;
+							}
+
+								.comment-time a:before {
+									content: '\f017';
+								}
+
+					/* Comment reply */
+
+					.comment-meta .comment-reply-link,
+					.comment-meta .comment-reply-login {
+						box-shadow: inset 1px 0 0 #fafafa;
+						color: rgba(0,0,0,0.3);
+						display: block;
+						height: 2.5em;
+						overflow: hidden;
+						position: absolute;
+							top: 0;
+							right: 0;
+						width: 2.5em;
+					}
+					.comment-meta .comment-reply-link:hover,
+					.comment-meta .comment-reply-link:focus,
+					.comment-meta .comment-reply-login:hover,
+					.comment-meta .comment-reply-login:focus {
+						background: #d64431;
+						box-shadow: none;
+						color: #fff;
+					}
+						.comment-reply-link:before,
+						.comment-reply-login:before {
+							content: '\f112';
+							height: 3.2em;
+							font-size: 0.8em;
+							line-height: 3.3;
+							text-align: center;
+							width: 3.1em;
+						}
+
+				/* === Comment content === */
+
+				.comment-content {
+					padding: 1.5em 1.5em 0 3.25em;
+				}
+					.comment-moderation {
+						font-style: italic;
+					}
+					.comment-content ol {list-style-type: decimal;}
+
+	/* === Comment Form === */
+	.comment-respond {
+		border: 0.8em solid #fff;
+		clear: both;
+		margin-bottom: 1.75em;
+		padding: 6% 6% 2%;
+		position: relative;
+	}
+
+		#reply-title {
+			font-weight: normal;
+			letter-spacing: 0.02em;
+			text-align: center;
+			text-transform: uppercase;
+		}
+
+				/* Cancel comment reply */
+				#cancel-comment-reply-link {
+					background: #d64431;
+					color: #fff;
+					display: block;
+					height: 2em;
+					overflow: hidden;
+					position: absolute;
+						top: 0;
+						right: 0;
+					width: 2em;
+				}
+				#cancel-comment-reply-link:hover,
+				#cancel-comment-reply-link:focus {
+					background: rgba(0,0,0,0.5);
+					box-shadow: none;
+				}
+					#cancel-comment-reply-link:before {
+						content: '\f00d';
+						line-height: 2;
+						text-align: center;
+						width: 2em;
+					}
+
+		/* === Comment form === */
+
+			.comment-notes,
+			.logged-in-as,
+			.must-log-in{
+				background: rgba(0,0,0,0.01);
+				border-top: 1px solid rgba(0,0,0,0.015);
+				border-bottom: 1px solid rgba(0,0,0,0.015);
+				font-size: 0.8em;
+				padding: 0.75em 1em;
+				text-align: center;
+			}
+
+				.required {color: #d00;}
+
+			/* comment form field containers */
+			.comment-form-author,
+			.comment-form-email,
+			.comment-form-url,
+			.comment-form-comment {
+				margin-bottom: 0.25em;
+				position: relative;
+			}
+
+				/* icon holder */
+				.comment-form-author label,
+				.comment-form-email label,
+				.comment-form-url label,
+				.comment-form-comment label {
+					display: block;
+					height: 2.5em;
+					overflow: hidden;
+					position: absolute;
+						right: 0;
+						top: 0;
+					width: 2.5em;
+				}
+
+					/* icons */
+					.comment-form-author label:before,
+					.comment-form-email label:before,
+					.comment-form-url label:before,
+					.comment-form-comment label:before {
+						color: rgba(0,0,0,0.15);
+						height: 2.5em;
+						line-height: 2.5em;
+						text-align: center;
+						width: 2.5em;
+					}
+					.comment-form-author label:before {content: '\f007';}
+					.comment-form-email label:before {content: '\f0e0';}
+					.comment-form-url label:before {content: '\f0c1';}
+					.comment-form-comment label:before {content: '\f075';}
+
+				/* input fields */
+				.comment-form input[type="text"],
+				.comment-form input[type="email"],
+				.comment-form input[type="url"],
+				.comment-form textarea {
+					padding-right: 2.5em;
+					width: 100%;
+				}
+
+			/* allowed tags */
+			.form-allowed-tags {
+				font-size: 0.8em;
+				padding: 1em;
+			}
+				.form-allowed-tags code {
+					box-sizing: content-box;
+					display: block;
+					margin: 1em -1em -1em;
+				}
+
+/*--------------------------------------------------------------
+11.0 Media
+--------------------------------------------------------------*/
+.entry-content img.wp-smiley,
+.comment-content img.wp-smiley {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	height: auto;
+	margin: 0;
+	/* size */
+		max-height: none;
+		max-width: none;
+		min-height: 0;
+		min-width: 0;
+	padding: 0;
+	width: auto;
+}
+
+/* Twitter embed */
+iframe.twitter-tweet {
+	margin: 0 0 1.75em !important;
+	}
+
+/* Make sure embeds and iframes fit their containers */
+
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+.embed-wrap {
+	height: 0;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	padding-bottom: 56.25%;
+	position: relative;
+	}
+	.embed-wrap iframe,
+	.embed-wrap object,
+	.embed-wrap embed {
+		height: 100%;
+		max-width: 100%;
+		position: absolute;
+			left: 0;
+			top: 0;
+		width: 100%;
+		}
+
+/* === Audio / Video Shortcodes + Playlists === */
+
+.mejs-audio,
+.mejs-video,
+.wp-playlist {
+	margin-bottom: 1.75em;
+	}
+
+.mejs-container,
+.mejs-container video,
+.mejs-container audio,
+.mejs-layer {
+	max-width: 100%;
+}
+
+.mejs-audio *,
+.mejs-video *,
+.wp-playlist * {
+	transition: all 0s ease-in-out;
+}
+
+.mejs-audio a,
+.mejs-video a,
+.wp-playlist a {
+	transition: all 0.2s ease-in-out;
+}
+
+.mejs-button button,
+.mejs-button button:hover,
+.mejs-button button:focus {
+	box-shadow: none;
+}
+
+/*--------------------------------------------------------------
+11.1 Captions
+--------------------------------------------------------------*/
+.wp-caption {
+	margin-bottom: 0.75em;
+	max-width: 100%;
+}
+
+	.wp-caption img[class*="wp-image-"] {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.wp-caption-text { /* for normal and gallery captions */
+		font-size: 0.8em;
+		text-align: center;
+	}
+
+	.wp-caption .wp-caption-text { /* for normal captions only */
+		padding: 0.8075em 0;
+	}
+
+/*--------------------------------------------------------------
+11.2 Galleries
+--------------------------------------------------------------*/
+.gallery {
+	margin-bottom: 1.75em;
+}
+
+.gallery-item {
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+}
+
+	.gallery-caption {
+		margin: 0.25em 0.25em 0.75em;
+	}
+
+.gallery-columns-2 .gallery-item {max-width: 50%;}
+.gallery-columns-3 .gallery-item {max-width: 33.33%;}
+.gallery-columns-4 .gallery-item {max-width: 25%;}
+.gallery-columns-5 .gallery-item {max-width: 20%;}
+.gallery-columns-6 .gallery-item {max-width: 16.66%;}
+.gallery-columns-7 .gallery-item {max-width: 14.28%;}
+.gallery-columns-8 .gallery-item {max-width: 12.5%;}
+.gallery-columns-9 .gallery-item {max-width: 11.11%;}
+.gallery-caption {display: block;}
+
+/*--------------------------------------------------------------
+12.0 Layout
+--------------------------------------------------------------*/
+
+#page {
+	margin: 0 auto;
+	min-width: 320px;
+	overflow: hidden;
+	position: relative;
+}
+
+.site-header,
+.site-content,
+	.content-area,
+		.singular .entry,
+			.singular .entry-header,
+			.singular .entry-content,
+			.page-content,
+			.singular .entry-footer,
+		.paging-navigation,
+		.post-navigation,
+		.comments-area,
+			.comments-area .comment-list,
+			.comments-area  .comment-list > li,
+			.comments-area  .children,
+			.comments-area  .children > li,
+			.comment-navigation,
+	.widget-area,
+.site-footer,
+	.site-info {
+	clear: both;
+	float: left;
+	width: 100%;
+}
+
+	/* === Header === */
+
+	.site-header {
+		background-color: #000;
+		color: rgba(255,255,255,0.5);
+		max-height: 500px;
+		overflow: hidden;
+		padding: 10% 0;
+		position: relative;
+		text-align: center;
+	}
+
+		.header-overlay {
+			background: #000;
+			content: '';
+			display: block;
+			opacity: 0.1;
+			position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			z-index: 1;
+		}
+
+		.site-branding {
+			display: inline-block;
+			margin: 0 auto;
+			max-width: 1200px;
+			overflow: hidden;
+			position: relative;
+			vertical-align: middle;
+			width: 75%;
+			z-index: 2;
+		}
+
+			/* Site title */
+
+			.site-title {
+				font-size: 2.4em;
+				font-weight: bold;
+				line-height: 1;
+				margin-bottom: 0;
+			}
+
+				.site-title .text-link {
+					background: #080808;
+					display: inline-block;
+					color: #fff;
+					line-height: 1.5;
+					margin: 0 auto;
+					padding: 0.45em 1.2em;
+					text-transform: uppercase;
+				}
+
+				.site-title .text-link:hover,
+				.site-title .text-link:focus {
+					background: rgba(0,0,0,0.9);
+					color: #fff;
+				}
+
+				/* Site title logo */
+				.site-title .logo-link {
+					display: inline-block;
+				}
+					.site-title .logo-link img {
+						display: block;
+					}
+
+			.site-description {
+				color: #fff;
+				display: inline-block;
+				font-size: 1.2em;
+				font-weight: normal;
+				margin-top: 1.5em;
+				margin-bottom: 0;
+			}
+
+	/* === Content === */
+
+		/* === Primary === */
+
+		.content-area {
+			padding: 4%;
+		}
+
+			.site-main {
+				margin: 0 auto;
+				max-width: 1200px;
+				position: relative;
+				word-spacing: -5px;
+			}
+
+				.site-main * {
+					word-spacing: 0;
+				}
+
+		/* === Secondary === */
+
+		.widget-area {
+			background: #fff;
+			font-size: 1.4rem;
+			padding: 6% 4%;
+			text-align: center;
+			word-spacing: -5px;
+		}
+
+			.widget-area * {
+				word-spacing: 0;
+			}
+
+			.sidebar, #sidebar {
+				padding: 0 2%;
+				text-align: left;
+			}
+
+	/* === Footer === */
+
+	.site-footer {
+		border-top: 1px solid rgba(0,0,0,0.02);
+		padding: 4%;
+		text-align: center;
+	}
+		.site-footer .wrap {
+			margin: 0 auto;
+			max-width: 1200px;
+		}
+			.site-info {
+				font-size: 1.5rem;
+				font-style: italic;
+				line-height: 1.7;
+				padding: 2%;
+			}
+				.site-info a {
+					color: #d64431;
+				}
+
+				.site-info p {
+					display: block;
+					margin: 0;
+					padding: 0;
+				}
+
+/*--------------------------------------------------------------
+13.0 Style Groups
+--------------------------------------------------------------*/
+
+
+img.alignleft,
+img.alignright,
+blockquote.alignleft,
+blockquote.alignright,
+.wp-caption.alignleft,
+.wp-caption.alignright {
+	/* these are used as inline elements so let's give them a max-width */
+	margin-top: 0.25em;
+	max-width: 62%;
+}
+
+legend,
+.nav,
+.paging-navigation,
+.post-navigation,
+.comment-navigation,
+.widget-title,
+.widgettitle,
+.preview .entry-meta,
+#page #infinite-handle span {
+	font-family: 'PT Mono', Arial, Helvetica, sans-serif;
+}
+
+/*--------------------------------------------------------------
+14.0 Jetpack
+--------------------------------------------------------------*/
+
+#page .slideshow-window a:hover,
+#page .slideshow-window a:focus {
+	box-shadow: none;
+}
+
+#page .video-player {
+	/* video-player DIV is from VideoPress of the Jetpack plugin.
+		In-line CSS for width and height are calculated and inserted
+		on page load, but the height value isn't accurate for smaller
+		screens so let's override it */
+	height: auto !important;
+	margin-bottom: 1.75em;
+}
+
+#page .tiled-gallery * {
+	transition: all 0s linear;
+}
+
+/* === Infinite Scroll === */
+
+/*
+ * Globally hidden elements when Infinite Scroll
+ * is supported and in use.
+ */
+.infinite-scroll .paging-navigation,
+.infinite-scroll.neverending .site-footer {
+	display: none;
+}
+
+/*
+ * When Infinite Scroll has reached its end we
+ * need to re-display elements that were hidden.
+ */
+.infinity-end.neverending .site-footer {
+	display: block;
+}
+
+/* Center the loading spinner */
+#page .infinite-loader .spinner {
+	margin-left: 48.2%;
+}
+
+/* === Load more button === */
+#page #infinite-handle {
+	cursor: pointer;
+}
+	#page #infinite-handle span {
+		background: transparent;
+		color: rgba(0,0,0,0.8);
+	}
+	#page #infinite-handle:hover span {
+		color: #d64431;
+	}
+
+.loader {
+	background: rgba(255,255,255,0.6);
+	color: #111;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: 99;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.75s ease-in-out;
+}
+	body.loading .loader {
+		opacity: 1;
+		visibility: visible;
+		transition: all 0.35s ease-in-out;
+	}
+	.loader > div {
+		display: inline-block;
+		margin: 0 auto;
+		left: -25%;
+		top: 25%;
+		transform: translateY(-25%);
+	}
+
+/*--------------------------------------------------------------
+Responsive CSS for devices with at least 720px screen width
+--------------------------------------------------------------*/
+
+@media only screen and (min-width: 720px) {
+
+	/* === Navigation === */
+
+	.nav.social {
+		font-size: 2.2em;
+	}
+
+	/* === Post Navigation === */
+
+	.post-navigation .nav-links {
+		border-radius: 4rem;
+		}
+
+		.post-navigation .nav-previous + .nav-next {
+			border: 0;
+			border-left: 4px solid rgba(0,0,0,0.02)
+		}
+
+		.post-navigation .nav-previous,
+		.post-navigation .nav-next {
+			display: inline-block;
+			width: 50%;
+		}
+		.post-navigation .nav-next {
+			text-align: right;
+		}
+
+	/* === Content === */
+
+	.site-main {
+		font-size: 1.6rem;
+	}
+
+	.page-title,
+	.singular .entry-title {
+		padding-left: 12%;
+		padding-right: 12%;
+	}
+
+	.singular .entry-meta {
+		padding-left: 24%;
+		padding-right: 24%;
+	}
+
+	/* === Comments === */
+
+	.comments-area {
+		float: none;
+		margin: 0 auto;
+		max-width: 720px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+		/* === Threaded Comments */
+
+		li li .comment-body {margin-left: 2.5em;}
+		li li li .comment-body {margin-left: 5em;}
+		li li li li .comment-body {margin-left: 7.5em;}
+		li li li li li .comment-body {margin-left: 10em;}
+		li li li li li li .comment-body {margin-left: 12.5em;}
+		li li li li li li li .comment-body {margin-left: 15em;}
+		li li li li li li li li .comment-body {margin-left: 17.5em;}
+		li li li li li li li li li .comment-body {margin-left: 20em;}
+		li li li li li li li li li li .comment-body {margin-left: 22.5em;}
+
+	/* === Posts and Pages === */
+
+	.entry {
+		width: calc(50% - 2%);
+	}
+
+	.singular .entry {
+		clear: both;
+		float: left;
+		display: block;
+		width: 100%;
+	}
+
+		.preview .entry-title {
+			font-size: 1.3125em;
+		}
+
+	/* === Singular Posts and Pages === */
+
+	.singular .entry-footer {
+		padding-left: 12%;
+		padding-right: 12%;
+	}
+
+		.singular .entry-footer > span {
+			display: inline-block;
+			margin-right: 1em;
+		}
+
+	/* === Site Header (Medium) === */
+
+	.site-header {
+		font-size: 1.6rem;
+	}
+
+}
+
+/*--------------------------------------------------------------
+Responsive CSS for devices with at least 980px screen width
+--------------------------------------------------------------*/
+@media only screen and (min-width: 980px) {
+
+	/* === Menu Filter === */
+
+	.nav.dropdown {
+		padding: 0;
+		margin-top: -8%;
+		margin-bottom: 2%;
+	}
+		/* Hide toggle button */
+		.nav.dropdown .open-button {
+			display: none;
+		}
+
+		/* Overall container */
+		.nav.dropdown .wrap {
+			background: #fafafa;
+			display: inline-block;
+			padding: 2% 4% 0;
+		}
+
+			/* Top level menu items container */
+			.nav.dropdown .wrap > ul,
+			.nav.dropdown.show-menu .wrap > ul {
+				box-shadow: none;
+				margin: 0 0 1.5em;
+				max-height: none;
+				overflow: visible;
+			}
+				/* All menu items */
+				.nav.dropdown li {
+					display: inline-block;
+				}
+					/* Item links */
+					.nav.dropdown li a {
+						background: transparent;
+						border: 4px solid rgba(0,0,0,0.02);
+						font-size: 1.2rem;
+						letter-spacing: 0.08em;
+						margin: 0.4rem;
+						padding: 0.6em 1.2em;
+						padding-right: 2.4em;
+						text-align: left;
+						text-transform: uppercase;
+					}
+					/* Item links hover/focus state */
+					.nav.dropdown li a:hover,
+					.nav.dropdown li a:focus,
+					.nav.dropdown .current-menu-item > a {
+						background: #d64431;
+						box-shadow: none;
+						border-color: #d64431;
+						color: #fff;
+						padding-left: 1.2em;
+					}
+					/* Item link current state */
+					.nav.dropdown .current-menu-item > a {
+						background: transparent;
+						color: #d64431;
+					}
+						/* Item link utility icon */
+						.nav.dropdown li a::after {
+							content: '\f0d7';
+							position: absolute;
+								top: 0.6em;
+								right: 0.9em;
+						}
+							.nav.dropdown li li a::after {
+								content: '\f0da';
+								top: 0.5em;
+							}
+					.nav.dropdown li a:only-child {
+						padding-right: 1.2em;
+					}
+						/* Unset icon if there's no dropdown icon */
+						.nav.dropdown li a:only-child::after {
+							content: '';
+						}
+
+
+					/* === Sub menu items === */
+						.nav.dropdown ul ul {
+							border: 0;
+							left: 0;
+							margin: 0.4rem;
+							min-width: 220px;
+							opacity: 0;
+							padding: 0;
+							position: absolute;
+							top: 100%;
+ 							visibility: hidden;
+							z-index: 99;
+						}
+						.nav.dropdown li:hover > ul {
+							opacity: 1;
+							visibility: visible;
+						}
+							.nav.dropdown li li {
+								display: block;
+								width: 100%;
+							}
+								.nav.dropdown li li a {
+									background: #000;
+									border: 0;
+									border-bottom: 1px dotted rgba(255,255,255,0.15);
+									color: #fff;
+									font-size: 1.2em;
+									letter-spacing: 0;
+									margin: 0;
+									padding: 0.5em 1.3em;
+									text-transform: none;
+								}
+								.nav.dropdown li li a:hover,
+								.nav.dropdown li li a:focus,
+								.nav.dropdown li .current-menu-item > a {
+									background: #000;
+									border-color: rgba(255,255,255,0.15);
+									box-shadow: inset 3px 0 0 #d64431;
+									color: #d64431;
+									padding-left: 1.3em;
+								}
+						/* === 3rd level items === */
+							.nav.dropdown ul ul ul {
+								left: 100%;
+								margin-top: 0;
+								top: 0;
+							}
+
+		.nav.dropdown .search-wrap {
+			margin-left: 0.25em;
+			margin-right: 0.25em;
+		}
+
+	/* === Content === */
+
+	.site-main {
+		font-size: 1.8rem;
+	}
+
+	/* ===  Site Header (Large) === */
+
+	.site-header {
+		height: 500px;
+		font-size: 1.8rem;
+		padding: 0;
+		/* vertically centers .site-branding */
+		line-height: 500px;
+	}
+
+		.site-branding {
+			/* resets .site-header 500px line-height
+			so .site-branding children display normally */
+			line-height: 1.5;
+		}
+
+			/* Site title */
+
+			.site-title {
+				font-size: 4.4em;
+			}
+
+				.site-title .text-link {
+					letter-spacing: 2px;
+					padding: 0.33em 1.2em;
+				}
+
+			.site-description {
+				letter-spacing: -0.01em;
+				max-width: 66.66%;
+			}
+
+		/* === Widget Area === */
+
+			/*
+			* Set sidebar width based on JS detection of
+		 	* number of active sidebars. See inc/scripts.js
+		 	*/
+			.sidebar,
+			#sidebar {
+				display: inline-block;
+				vertical-align: top;
+				width: 62%;
+			}
+			.widget-area.childs-2 .sidebar {width: 50%;}
+			.widget-area.childs-3 .sidebar {width: 33.3%;}
+			.widget-area.childs-4 .sidebar {width: 25%;}
+			.widget-area.childs-5 .sidebar {width: 20%;}
+
+}
+
+/*--------------------------------------------------------------
+Responsive CSS for devices with at least 1200px screen width
+--------------------------------------------------------------*/
+@media only screen and (min-width: 1200px) {
+	/* === Layout === */
+	.content-area,
+	.site-footer {
+		padding-top: 48px;
+		padding-bottom: 48px;
+	}
+	.widget-area {
+		padding: 72px 48px;
+	}
+		.sidebar {
+			padding: 0 24px;
+		}
+}
+
+/*--------------------------------------------------------------
+Responsive CSS for devices with at least 2000px screen width
+--------------------------------------------------------------*/
+@media only screen and (min-width: 2000px) {
+			.sidebar,
+			#sidebar {
+				max-width: 600px;
+			}
+}

@@ -1,0 +1,150 @@
+.mejs-container,
+.mejs-embed,
+.mejs-embed body,
+.mejs-container .mejs-controls {
+	background: #121212;
+}
+
+.mejs-controls .mejs-time-rail span,
+.mejs-controls .mejs-time-rail a {
+	border-radius: 0;
+}
+
+/* Time Loaded bar */
+.mejs-controls .mejs-time-rail .mejs-time-loaded {
+	background: rgba(255,255,255,0.2);
+}
+/* Time current bar */
+.mejs-controls .mejs-time-rail .mejs-time-current {
+	background: #fff;
+}
+
+/* time float */
+.mejs-controls .mejs-time-rail .mejs-time-float{
+	color: #333;
+	background: #ccc;
+	border: 0;
+}
+	.mejs-controls .mejs-time-rail .mejs-time-float-corner {
+		border-top-color: #ccc;
+	}
+
+/*
+ * PLAYLISTS
+ * ============================================================
+ * */
+
+.wp-playlist {
+	background: #1b1b1b;
+	border: 0;
+	box-shadow: none;
+	color: rgba(255,255,255,0.65);
+	padding: 0.5em;
+}
+
+	/* Media playlist links */
+	.wp-playlist-light .wp-playlist-caption {
+		color: rgba(255,255,255,0.7);
+	}
+
+	/* Media playlist link hover/focus state */
+	.wp-playlist-tracks a:hover,
+	.wp-playlist-tracks a:focus {
+		color: #fff;
+	}
+
+	/* === Current item === */
+
+	.wp-playlist-current-item {
+		background: #121212;
+		border-bottom: 1px dotted #232323;
+		clear: both;
+		height: auto;
+		margin: 0;
+		overflow: hidden;
+		padding: 0.5em;
+		text-shadow: none;
+	}
+
+		/* current item image */
+		.wp-playlist .wp-playlist-current-item img {
+			background: #fff;
+			display: inline-block;
+			float: left;
+			max-width: 80px;
+			padding: 6px;
+			height: auto;
+			vertical-align: top;
+		}
+
+		.rtl .wp-playlist .wp-playlist-current-item img {
+			float: right;
+		}
+
+		/* current item caption */
+		.wp-playlist-current-item .wp-playlist-caption {
+			display: block;
+			color: #ddd;
+			max-width: calc(100% - 80px);
+			overflow: hidden;
+			padding: 0 0.75em 0.25em;
+			text-overflow: ellipsis;
+			vertical-align: top;
+			white-space: nowrap;
+		}
+
+			.wp-playlist-item-meta {
+				font-size: 1.2em;
+			}
+
+	/* === Container === */
+	.wp-playlist .mejs-container {
+		margin: 0;
+		width: 100%;
+	}
+
+	/* === Playlist Tracks */
+
+	.wp-playlist-tracks {margin: 0;}
+
+		.wp-playlist-item {
+			border-top: 1px solid #232323;
+			border-bottom: 1px solid #141414;
+			cursor: pointer;
+			font-size: 0.9em;
+			padding: 0.5em;
+			position: relative;
+		}
+
+		.wp-playlist-item:first-child {border-top: 0;}
+		.wp-playlist-item:last-child {border-bottom: 0;}
+
+			/* playlist item caption */
+			.wp-playlist-item .wp-playlist-caption {
+				/* this is different from first instance of .wp-playlist-caption above */
+				display: block;
+				max-width: -webkit-calc(100% - 60px);
+				max-width: calc(100% - 60px);
+			}
+
+			/* playlist item length */
+			.wp-playlist-item-length {
+				position: absolute;
+					right: 0.5em;
+					top: 0.5em;
+			}
+
+			.rtl .wp-playlist-item-length {
+				left: 0.5em;
+				right: auto;
+			}
+
+		/* current item of playlist tracks */
+		.wp-playlist-light .wp-playlist-playing,
+			.wp-playlist-playing .wp-playlist-caption {
+				color: #fff;
+				font-weight: bold;
+			}
+		.wp-playlist-light .wp-playlist-playing {
+			background: rgba(0,0,0,0.12);
+		}

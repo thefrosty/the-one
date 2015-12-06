@@ -1,0 +1,20 @@
+{
+  "name": "thefrosty/The-One-Theme",
+  "version": "1.1.0"
+  "description": "A photo-centric theme.",
+  "keywords": [
+    "wordpress"
+  ],
+  "homepage": "http://frosty.media/theme/the-one",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Austin Passy",
+      "email": "austin@passy.co",
+      "homepage": "http://austin.passy.co"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/thefrosty/The-One-Them/issues",
+  }
+}

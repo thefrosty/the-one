@@ -1,0 +1,490 @@
+/*--------------------------------------------------------------
+TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Defaults
+2.0 Base Style
+3.0 Next to Content Style
+4.0 Fixed Style
+	4.1 Fixed Style min-width: 980
+--------------------------------------------------------------*/
+
+/**
+ ***********************************************************************
+ * 1.0 Defaults
+ ***********************************************************************
+ */
+
+/* === Set icons === */
+.open-button::before,
+.close-button::before,
+.share li a::before,
+.share li a::after {
+	display: inline-block;
+	font-family: "FontAwesome";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	speak: none;
+	line-height: inherit;
+	text-decoration: none;
+	text-transform: none;
+}
+
+/* === Set specific icons === */
+.share li a[href*="facebook.com"]::before {content: '\f09a';}
+.share li a[href*="mailto:"]::before {content: '\f0e0';}
+.share li a[href*="linkedin.com"]::before {content: '\f0e1';}
+.share li a.share-pinterest::before,
+.share li a[href*="pinterest.com"]::before {content: '\f0d2';}
+.share li a[href*="plus.google.com"]::before {content: '\f0d5';}
+.share li a[href*="reddit.com"]::before {content: '\f1a1';}
+.share li a[href*="stumbleupon.com"]::before {content: '\f1a4';}
+.share li a[href*="tumblr.com"]::before {content: '\f173';}
+.share li a[href*="twitter.com"]::before {content: '\f099';}
+
+/* === link style === */
+.share li a {
+	background: #222;
+	border-radius: 2px;
+	box-shadow: none;
+	color: #fff;
+	display: block;
+	letter-spacing: 0;
+	padding: 0;
+	position: relative;
+}
+
+/* === link hover/focus states === */
+.share li a:hover,
+.share li a:focus {
+	border: 0;
+	box-shadow: none;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+/* === Specific link background colors === */
+.share .share-facebook {background: #36569c;}
+.share .share-googleplus {background: #d73d32;}
+.share .share-linkedin {background: #007ab8;}
+.share .share-pinterest {background: #d11c16;}
+.share .share-reddit {background: #ff4606;}
+.share .share-stumbleupon {background: #ea4b24;}
+.share .share-tumblr {background: #1b355b;}
+.share .share-twitter {background: #00aaf3;}
+
+	/* === icon style === */
+	.share li a::before {
+		display: inline-block;
+		line-height: 2.2;
+		text-align: center;
+		transition: all 0.3s ease-in-out;
+		position: relative;
+		width: 2.2em;
+		z-index: 2;
+	}
+
+	/* === overlay hover effect, hide by default === */
+	.share li a::after {
+		box-shadow: none;
+		content: '';
+		display: block;
+		position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		transition: all 0.3s ease-in-out;
+		z-index: 1;
+	}
+	/* show overlay on hover */
+	.share li a:hover::after {
+		border-radius: inherit;
+		box-shadow: inset 0 100px 0 rgba(255,255,255,0.1);
+	}
+
+	/* === default share title, set position + z-index pre-emptively === */
+	.share .share-title {
+		position: relative;
+		z-index: 2;
+	}
+
+
+/* === DEFAULT STRUCTURE === */
+.share,
+.share .wrap {
+	clear: both;
+	float: left;
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+	
+	/* List toggle */
+	.share .open-button,
+	.share .close-button {
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+		display: none;
+		font-size: 16px;
+		margin: 0;
+		padding: 0;
+	}
+	
+	/* List toggle hover */
+	.share .open-button:hover,
+	.share .open-button:focus,
+	.share .close-button:hover,
+	.share .close-button:focus {
+		background: transparent;
+		outline: none;
+	}
+	
+	/* Wrap container */
+	.share .wrap {
+		font-size: inherit;
+		margin: 0;
+	}
+
+		/* Menu list */
+		.share ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			word-spacing: 0;
+		}
+			/* Menu item */
+			.share li {
+				display: inline-block;
+				float: left;
+				margin: 0.25em 0.125em;
+				padding: 0;
+				position: relative;
+				text-align: left;
+				vertical-align: top;
+				word-spacing: 0;
+			}
+
+/**
+ ***********************************************************************
+ * 2.0 Base Style
+ ***********************************************************************
+ */
+
+	.share.base .share-title {
+		background: #000;
+		border-radius: 1.6em;
+		display: block;
+		color: #eee;
+		font-size: 0.9em;
+		margin: 0 0 0.65em -0.5em;
+		opacity: 0;
+		padding: 0.3em 1em;
+		position: absolute;
+			bottom: 100%;
+			left: 0;
+		visibility: hidden;
+		white-space: nowrap;
+	}
+	.share.base a:hover .share-title,
+	.share.base a:focus .share-title {
+		opacity: 1;
+		visibility: visible;
+	}
+		.share.base .share-title::before {
+			border-style: solid;
+			border-width: 6px 5px 0 5px;
+			border-color: #000 transparent transparent transparent;
+			content: '';
+			display: block;
+			height: 0;
+			margin-left: 1.5em;
+			position: absolute;
+				top: 100%;
+				left: 0;
+			width: 0;
+		}
+
+/**
+ ***********************************************************************
+ * 3.0 Next to Content Style
+ *
+ * Inherits style from Base then overrides some of it. This style
+ * floats the share list to the side of content on big devices when
+ * the parent DIV is `.entry-content`.
+ ***********************************************************************
+ */
+
+@media only screen and (min-width: 980px) {
+	
+	/* Float the share list to the left side */
+	.entry-content .share.side {
+		clear: none;
+		margin: 0 0 0 -2.2em;
+		position: absolute;
+			top: 0;
+			left: 0;
+		width: auto;
+		z-index: 9;
+	}
+		/* list item */
+		.entry-content .share.side li {
+			display: block;
+			float: none;
+			margin: 0 0 0.5em;
+		}
+				/* share title */
+				.entry-content .share.side .share-title {
+					margin: 0 0 -1.05em 0.4em;
+						bottom: 50%;
+						left: 100%;
+				}
+					/* share title arrow pointer */
+					.entry-content .share.side .share-title::before {
+						border-width: 6px 7px 6px 0;
+						border-color: transparent #000 transparent transparent;
+						margin: -6px 0 0 -5px;
+						position: absolute;
+							top: 50%;
+							left: 0;
+					}
+}
+
+/**
+ ***********************************************************************
+ * 4.0 Fixed Style (floating, attached to page bottom or page left)
+ ***********************************************************************
+ */
+
+/*
+ * If social sharing is enabled and fixed is chosen as position, add
+ * padding bottom to body to offset space for the share toggle button.
+ */
+body.sharing-fixed {
+	padding-bottom: 45px;
+}
+
+/*
+ * Sharing area container.
+ * Hide it by default using height: 0
+ */
+.share.fixed {
+	font-size: 16px;
+	margin: 0;
+	overflow: visible;
+	height: 0;
+	min-width: 320px;
+	position: fixed;
+		bottom: 0;
+		left: 0;
+	transition: height 0.4s cubic-bezier(.26,.45,.74,.87);
+	z-index: 100000;
+}
+/*
+ * Sharing area ACTIVE container.
+ * When active, show it by using height: 62%.
+ */
+.share.fixed.show-menu {
+	height: 50%;
+	z-index: 100001; /* higher than WordPress `.admin-bar`, and one z-index higher than itself */
+}
+	/*
+	 * Share toggle
+	 * The toggle's parent height is 0 so share toggle
+	 * is hidden by default. Uses negative margin-top to
+	 * show itself.
+	 */
+	.share.fixed .open-button {
+		background: #111;
+		clear: both;
+		color: #fff;
+		display: block;
+		float: left;
+		font-size: 18px;
+		margin-top: -45px;
+		padding: 0.5em 2.5em;
+		position: relative;
+		width: 100%;
+	}
+		/* Toggle's Expand Icon */
+		.share.fixed .open-button::before {
+			content: '\f0c9';
+			position: absolute;
+				top: 0.5em;
+				right: 1em;
+		}
+		/* Toggle's Close Icon */
+		.share.fixed.show-menu .open-button::before {
+			content: '\f00d';
+		}
+		
+	/* Share toggle mask */
+	.share.fixed .close-button {
+		background: transparent;
+		color: transparent;
+		display: block;
+		height: 0;
+		margin-top: -45px;
+		position: absolute;
+			top: 0;
+			right:0;
+			left: 0;
+		width: 100%;
+	}
+	/* Share toggle mask, active */
+	.share.fixed.show-menu .close-button {
+		background: rgba(0,0,0,0.5);
+		height: auto;
+		position: fixed;
+			bottom: 0;
+		z-index: -1;
+	}
+	
+	/* Links list container */
+	.share.fixed .wrap {
+		background: #fff;
+		height: 100%;
+		overflow: auto;
+		padding: 3%;
+		position: relative;
+		z-index: 2;
+	}
+		/* Links list */
+		.share.fixed ul {
+			word-spacing: -7px;
+		}
+			/* List item */
+			.share.fixed li {
+				float: none;
+				margin: 0.25em 1%;
+				width: 98%;
+			}
+					/* Link Icon */
+					.share.fixed li a::before {
+						background: rgba(0,0,0,0.05);
+						box-shadow: 1px 0 0 rgba(0,0,0,0.1);
+					}
+					/* Share title */
+					.share.fixed .share-title {
+						font-size: 0.9em;
+						padding: 0 0.8em;
+						text-shadow: 0 1px 0 rgba(0,0,0,0.05);
+					}
+
+@media only screen and (min-width: 540px) {
+		.share.fixed  li {
+			width: 48%;
+		}
+}
+
+@media only screen and (min-width: 720px) {
+		.share.fixed {
+			font-size: 18px;
+		}
+}
+
+/* === 4.1 Fixed Style min-width: 980 === */
+@media only screen and (min-width: 980px) {
+
+	/*
+	 * Remove padding bottom for <body> tag.
+	 * Share list is not fixed to bottom on bigger screens/devices.
+	 */
+	body.sharing-fixed {
+		padding-bottom: 0;
+	}
+
+	/* Reset share list container to display as table */
+	.share.fixed,
+	.share.fixed.show-menu {
+		display: table;
+		height: 100%;
+		min-width: 0;
+	/* 	position */
+			bottom: 0;
+		width: auto;
+	}
+		/* Hide all toggle buttons, they're unnecessary at this point */
+		.share.fixed .open-button,
+		.share.fixed .close-button {
+			display: none;
+		}
+		
+		/*
+		* Reset share list parent DIV as table cell
+		* to vertically center everything within it.
+		*/
+		.share.fixed .wrap {
+			background: transparent;
+			clear: none;
+			display: table-cell;
+			float: none;
+			overflow: visible;
+			padding: 0;
+			vertical-align: middle;
+		}
+				/* list item */
+				.share.fixed li {
+					display: block;
+					margin: 0; /* Don't use margins here, breaks layout for some reason */
+					width: 100%;
+				}
+					/* links */
+					.share.fixed li a {
+						margin: 0.5em; /* list item margins moved to liste item links instead */
+						position: relative;
+					}
+						.share.fixed li a::before {
+							background: transparent;
+							box-shadow: none;
+						}
+						
+						/*
+						 * This was used to add a hover effect.
+						 * It's no longer needed here because
+						 * share titles will used instead.
+						 */
+						.share.fixed li a::after {
+							display: none;
+						}
+		
+						/* Set share title */
+						.share.fixed .share-title {
+							background: #000;
+							border-radius: 1.6em;
+							display: block;
+							color: #eee;
+							font-size: 0.9em;
+							margin: 0 0 -1.05em 0.4em;
+							opacity: 0;
+							padding: 0.3em 1em;
+							position: absolute;
+								bottom: 50%;
+								left: 100%;
+							visibility: hidden;
+							white-space: nowrap;
+						}
+						/* Show share title */
+						.share.fixed a:hover .share-title,
+						.share.fixed a:focus .share-title {
+							opacity: 1;
+							visibility: visible;
+						}
+							/* Share title pointer */
+							.share.fixed .share-title::before {
+								border-style: solid;
+								border-width: 6px 7px 6px 0;
+								border-color: transparent #000 transparent transparent;
+								content: '';
+								display: block;
+								height: 0;
+								margin: -6px 0 0 -5px;
+								position: absolute;
+									top: 50%;
+									left: 0;
+								width: 0;
+							}
+
+}/* End min-width: 980 */
