@@ -104,9 +104,11 @@ function entry_footer() {
 		}
 
 		/* translators: used between list items, there is a space after the comma */
-		$series_list = get_the_term_list( get_the_ID(), 'series', '',  __( ', ', 'the-one' ) );
-		if ( $series_list && !is_wp_error( $series_list ) ) {
-			printf( '<span class="cat-links">' . __( 'Series %1$s', 'the-one' ) . '</span>', $series_list );
+		if ( taxonomy_exists( 'series' ) ) {
+			$series_list = get_the_term_list( get_the_ID(), 'series', '', __( ', ', 'the-one' ) );
+			if ( $series_list && !is_wp_error( $series_list ) ) {
+				printf( '<span class="cat-links">' . __( 'Series %1$s', 'the-one' ) . '</span>', $series_list );
+			}
 		}
 	}
 
