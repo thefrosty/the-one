@@ -11,6 +11,11 @@ THe One is now build on [Hybrid Core](https://github.com/justintadlock/hybrid-co
 
 [View all features](http://theonetheme.com/) // [Live theme demo](http://theonetheme.com/demo/)
 
+## Minimum Requirements
+
+WordPress: 4.3
+PHP: 5.5
+
 ## Theme Support
 
 Each theme setting/option will have a description explaining what it does and how to use it.
