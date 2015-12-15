@@ -13,7 +13,7 @@ class Core {
 	public static $theme_dir;
 	public static $theme_uri;
 
-	const THEME_VERSION = '1.1.3';
+	const THEME_VERSION = '1.2.0';
 	const THEME_NAME = 'the-one';
 	const THEME_PREFIX = 'theone_';
 
@@ -43,7 +43,7 @@ class Core {
 	private function actions() {
 
 		add_action( 'init', array( $this, 'register_nav_menu' ) );
-		add_action( 'init', array( $this, 'github_updater' ), 1 );
+		add_action( 'tgmpa_register', array( $this, 'tgmpa_register' ) );
 		add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'wp_head', array( $this, 'search_form_insert' ) );
@@ -84,6 +84,8 @@ class Core {
 
 		/* Custom template tags for this theme. */
 		require self::$theme_dir . 'inc/Functions/template-tags.php';
+
+		require self::$theme_dir . 'inc/Libraries/class-tgm-plugin-activation.php';
 	}
 
 	/**
@@ -103,13 +105,39 @@ class Core {
 	}
 
 	/**
-	 * Update via GitHub.
+	 * Register the required plugins for this theme.
+	 *
+	 * The variable passed to tgmpa_register_plugins() should be an array of plugin
+	 * arrays.
+	 *
+	 * This function is hooked into tgmpa_init, which is fired within the
+	 * TGM_Plugin_Activation class constructor.
 	 */
-	public function github_updater() {
+	public function tgmpa_register() {
 
-		if ( !is_plugin_active( 'github-updater/github-updater.php' ) || !class_exists( 'Fragen\GitHub_Updater\Base', false ) ) {
-			require self::$theme_dir . 'inc/Libraries/github-updater/github-updater.php';
-		}
+		$plugins = array(
+			array(
+				'name'      => 'GitHub Updater',
+				'slug'      => 'github-updater',
+				'source'    => 'https://github.com/afragen/github-updater/archive/5.3.1.zip',
+				'required'  => false,
+			),
+		);
+
+		$config = array(
+			'id'           => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+			'default_path' => '',                      // Default absolute path to bundled plugins.
+			'menu'         => 'tgmpa-install-plugins', // Menu slug.
+			'parent_slug'  => 'themes.php',            // Parent menu slug.
+			'capability'   => 'edit_theme_options',    // Capability needed to view plugin install page, should be a capability associated with the parent menu used.
+			'has_notices'  => true,                    // Show admin notices or not.
+			'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
+			'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
+			'is_automatic' => false,                   // Automatically activate plugins after installation or not.
+			'message'      => '',                      // Message to output right before the plugins table.
+		);
+
+		tgmpa( $plugins, $config );
 	}
 
 	/**
@@ -280,6 +308,13 @@ class Core {
 		return '<a class="moretag read-more-link" href="'. get_permalink() . '">&#133;</a>';
 	}
 
+	/**
+	 * Returns a modified linked title.
+	 *
+	 * @param string $title The linked site title.
+	 *
+	 * @return string
+	 */
 	public function hybrid_site_title( $title ) {
 		return str_replace( '<a', '<a class="text-link"', $title );
 	}

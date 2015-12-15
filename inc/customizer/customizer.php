@@ -36,10 +36,10 @@ function theone_customize_register( $wp_customize ) {
 	 * Add sections
 	 * Accent color
 	 * Excerpts toggle
+	 * Search form toggle
 	 * Header
 	 * Overlay Color
 	 * Overlay Opacity
-	 * Search form toggle
 	 * Site title background color
 	 * Site description toggle
 	 * Site logo upload
@@ -117,6 +117,41 @@ function theone_customize_register( $wp_customize ) {
 			'section' => 'theone_section_general',
 			'priority' => 1,
 		) );
+
+	/**
+	 * Cleaner Gallery toggle
+	 */
+	$wp_customize->add_setting( 'theone_cleaner_gallery', array(
+		'default' => 0,
+		'sanitize_callback' => 'theone_sanitize_checkbox',
+	) );
+	$wp_customize->add_control( 'theone_cleaner_gallery', array(
+		'label' => __( 'Use Hybrid Core cleaner gallery', 'the-one' ),
+		'type' => 'checkbox',
+		'section' => 'theone_section_general',
+		'priority' => 1,
+	) );
+
+	/**
+	 * Search form toggle
+	 */
+	$wp_customize->add_setting( 'theone_search_form_insert', array(
+		'default' => 'none',
+		'sanitize_callback' => 'theone_sanitize_choices',
+	) );
+	$wp_customize->add_control( 'theone_search_form_insert', array(
+		'type' => 'radio',
+		'section' => 'theone_section_general',
+		'label' => __( 'Use search form at:', 'the-one' ),
+		'description' => __( 'If search form is used with any menu, make sure that menu is active first.', 'the-one' ),
+		'choices' => array(
+			'none' => __( 'None', 'the-one' ),
+			'menu_primary_top' => __( 'Top of Primary menu', 'the-one' ),
+			'menu_primary_bottom' => __( 'Bottom of Primary menu', 'the-one' ),
+			'menu_secondary_bottom' => __( 'Bottom of Secondary menu', 'the-one' ),
+			'footer_top' => __( 'Top of Footer', 'the-one' ),
+		),
+	) );
 	
 	/**
 	 * Header
@@ -159,27 +194,6 @@ function theone_customize_register( $wp_customize ) {
 				'8' => esc_html( '80%' ),
 				'9' => esc_html( '90%' ),
 				'99' => esc_html( '99%' ),
-			),
-		) );
-	
-	/**
-	 * Search form toggle
-	 */
-	$wp_customize->add_setting( 'theone_search_form_insert', array(
-			'default' => 'none',
-			'sanitize_callback' => 'theone_sanitize_choices',
-		) );
-	$wp_customize->add_control( 'theone_search_form_insert', array(
-			'type' => 'radio',
-			'section' => 'theone_section_general',
-			'label' => __( 'Use search form at:', 'the-one' ),
-			'description' => __( 'If search form is used with any menu, make sure that menu is active first.', 'the-one' ),
-			'choices' => array(
-				'none' => __( 'None', 'the-one' ),
-				'menu_primary_top' => __( 'Top of Primary menu', 'the-one' ),
-				'menu_primary_bottom' => __( 'Bottom of Primary menu', 'the-one' ),
-				'menu_secondary_bottom' => __( 'Bottom of Secondary menu', 'the-one' ),
-				'footer_top' => __( 'Top of Footer', 'the-one' ),
 			),
 		) );
 	
