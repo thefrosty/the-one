@@ -4,7 +4,7 @@
  * Author: Austin Passy
  * Author URI: http://austin.passy.co/
  * Description: A photo-centric theme. Features include: site color settings, custom menus, header image / color / opacity control, custom background option, smart bottom widgets area adjusting layout to number of active sidebars, threaded commenting, customized media player styles and integrated social network sharing / bookmarking links.
- * Version: 1.1.1
+ * Version: 1.1.2
  * License: GNU General Public License v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: the-one
@@ -1055,7 +1055,7 @@ You can still customize these via the child theme style sheet.
 	padding: 2% 2% 0;
 	position: relative;
 	text-align: center;
-	z-index: 2;
+	z-index: 5;
 	transition: all 0.35s
 }
 	/* Menu Toggle */
@@ -1452,7 +1452,7 @@ img.alignright { /* See "Style Groups" for more alignment rules */
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index: 3;
+	z-index: 2;
 }
 	.edit-content a {
 		background: #d64431;

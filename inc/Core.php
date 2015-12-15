@@ -13,7 +13,7 @@ class Core {
 	public static $theme_dir;
 	public static $theme_uri;
 
-	const THEME_VERSION = '1.1.1';
+	const THEME_VERSION = '1.1.2';
 	const THEME_NAME = 'the-one';
 	const THEME_PREFIX = 'theone_';
 
@@ -59,6 +59,7 @@ class Core {
 		add_filter( 'excerpt_length', array( $this, 'excerpt_length' ) );
 		add_filter( 'excerpt_more', array( $this, 'excerpt_more' ) );
 		add_filter( 'widget_text', 'do_shortcode' );
+		add_filter( 'hybrid_site_title', array( $this, 'hybrid_site_title') );
 	}
 
 	/**
@@ -216,7 +217,7 @@ class Core {
 		if ( 'none' === $search_form_placement ) {
 			return;
 		} else {
-			add_action( 'theone_' . sanitize_key( $search_form_placement ), array( $this, 'search_form' ) );
+			add_action( self::THEME_PREFIX . sanitize_key( $search_form_placement ), array( $this, 'search_form' ) );
 		}
 	}
 
@@ -277,6 +278,10 @@ class Core {
 	 */
 	public function excerpt_more( $more ) {
 		return '<a class="moretag read-more-link" href="'. get_permalink() . '">&#133;</a>';
+	}
+
+	public function hybrid_site_title( $title ) {
+		return str_replace( '<a', '<a class="text-link"', $title );
 	}
 
 }
