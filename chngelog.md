@@ -2,7 +2,7 @@
 
 You can see the changes made via the [commit log](https://github.com/thefrosty/The-One-Theme/commits/master) for the latest release.
 
-## [1.1.2] - 2015-12-15
+## [1.1.3] - 2015-12-15
 
 * Change nav.dropdown z-index value from 2 to 5.
 * Re-add text-link class to header link.
