@@ -7,14 +7,13 @@ photo blog and personalize it with your own logo and colors within minutes.
 The One is a fork of [Valerie](https://github.com/thefrosty/valerie) which is no longer online (but still accessible via my forked copy) 
 by Tung Do.
 
-THe One is now build on [Hybrid Core](https://github.com/justintadlock/hybrid-core)
+The One Theme is now built with [Hybrid Core](https://github.com/justintadlock/hybrid-core) at its core.
 
 [View all features](http://theonetheme.com/) // [Live theme demo](http://theonetheme.com/demo/)
 
 ## Minimum Requirements
 
-WordPress: 4.3
-PHP: 5.5
+WordPress: 4.3 | PHP: 5.5
 
 ## Theme Support
 
