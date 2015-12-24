@@ -13,7 +13,7 @@ class Core {
 	public static $theme_dir;
 	public static $theme_uri;
 
-	const THEME_VERSION = '1.2.1';
+	const THEME_VERSION = '1.2.2';
 	const THEME_NAME = 'the-one';
 	const THEME_PREFIX = 'theone_';
 
@@ -38,7 +38,7 @@ class Core {
 	}
 
 	/**
-	 *
+	 * Setup our action calls.
 	 */
 	private function actions() {
 
@@ -51,7 +51,7 @@ class Core {
 	}
 
 	/**
-	 *
+	 * Setup our filter calls.
 	 */
 	private function filters() {
 
@@ -63,7 +63,7 @@ class Core {
 	}
 
 	/**
-	 *
+	 * Include our required files.
 	 */
 	private function includes() {
 
@@ -85,6 +85,7 @@ class Core {
 		/* Custom template tags for this theme. */
 		require self::$theme_dir . 'inc/Functions/template-tags.php';
 
+		/* Include the TGM class. */
 		require self::$theme_dir . 'inc/Libraries/class-tgm-plugin-activation.php';
 	}
 
@@ -259,7 +260,7 @@ class Core {
 	}
 
 	/**
-	 *
+	 * Include the loading HTML view file.
 	 */
 	public function loading_html() {
 		include self::$theme_dir . 'views/loading.php';
@@ -273,6 +274,10 @@ class Core {
 
 	/**
 	 * Filter the body class.
+	 *
+	 * @param array $classes
+	 *
+	 * @return array
 	 */
 	public function body_class(  $classes ) {
 
@@ -291,7 +296,7 @@ class Core {
 	/**
 	 * Modifies the excerpt more
 	 *
-	 * @param $length
+	 * @param int $length
 	 *
 	 * @return int
 	 */
@@ -301,6 +306,8 @@ class Core {
 
 	/**
 	 * Modifies the excerpt more
+	 *
+	 * @param string $more
 	 *
 	 * @return string
 	 */

@@ -44,8 +44,14 @@ function post_nav() {
 		return;
 	}
 
-	$_previous_post_link = get_previous_post_link( '<div class="nav-previous">%link</div>', _x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'the-one' ) );
-	$_next_post_link = get_next_post_link( '<div class="nav-next">%link</div>', _x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link', 'the-one' ) );
+	$_previous_post_link = get_previous_post_link( '<div class="nav-previous">%link</div>',
+		_x( '<span class="meta-nav">&larr;</span>&nbsp;%title', 'Previous post link', 'the-one' )
+	);
+
+	$_next_post_link = get_next_post_link( '<div class="nav-next">%link</div>',
+		_x( '%title&nbsp;<span class="meta-nav">&rarr;</span>', 'Next post link', 'the-one' )
+	);
+
 	?>
 	<nav class="navigation post-navigation" role="navigation">
 		<h4 class="screen-reader-text"><?php _e( 'Post navigation', 'the-one' ); ?></h4>
@@ -71,15 +77,27 @@ function post_nav() {
 function posted_on() {
 
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 	}
 
-	$time_string = sprintf( $time_string, esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ), esc_attr( get_the_modified_date( 'c' ) ), esc_html( get_the_modified_date() ) );
+	$time_string = sprintf( $time_string,
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_html( get_the_modified_date() )
+	);
 
-	$posted_on = sprintf( _x( 'Posted on %s', 'post date', 'the-one' ), '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>' );
+	$posted_on = sprintf( _x( 'Posted on %s', 'post date', 'the-one' ),
+		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+	);
 
-	$byline = sprintf( _x( 'by %s', 'post author', 'the-one' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>' );
+	$byline = sprintf( _x( 'by %s', 'post author', 'the-one' ),
+		'<span class="author vcard"><a class="url fn n" href="' .
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' .
+			esc_html( get_the_author() ) . '</a></span>'
+	);
 
 	echo '<span class="posted-on">' . $posted_on . '</span> <span class="byline">' . $byline . '</span>';
 }
@@ -129,6 +147,7 @@ function entry_footer() {
  * @return string
  */
 function archive_title( $before = '', $after = '', $display = true ) {
+
 	if ( is_category() ) {
 		$title = sprintf( __( 'Category: %s', 'the-one' ), single_cat_title( '', false ) );
 	} elseif ( is_tag() ) {
@@ -178,6 +197,52 @@ function archive_description( $before = '', $after = '' ) {
 	if ( !empty( $description ) ) {
 		echo $before . $description . $after;
 	}
+}
+
+/**
+ * Get size information for all currently-registered image sizes.
+ *
+ * @global $_wp_additional_image_sizes
+ * @uses   get_intermediate_image_sizes()
+ * @return array $sizes Data for all currently-registered image sizes.
+ */
+function get_image_sizes() {
+	global $_wp_additional_image_sizes;
+
+	$sizes = array();
+
+	foreach ( get_intermediate_image_sizes() as $_size ) {
+		if ( in_array( $_size, array('thumbnail', 'medium', 'medium_large', 'large') ) ) {
+			$sizes[ $_size ]['width']  = get_option( "{$_size}_size_w" );
+			$sizes[ $_size ]['height'] = get_option( "{$_size}_size_h" );
+			$sizes[ $_size ]['crop']   = (bool) get_option( "{$_size}_crop" );
+		} elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
+			$sizes[ $_size ] = array(
+				'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
+				'height' => $_wp_additional_image_sizes[ $_size ]['height'],
+				'crop'   => $_wp_additional_image_sizes[ $_size ]['crop'],
+			);
+		}
+	}
+
+	return $sizes;
+}
+
+/**
+ * Get size information for a specific image size.
+ *
+ * @uses   get_image_sizes()
+ * @param  string $size The image size for which to retrieve data.
+ * @return bool|array $size Size data about an image size or false if the size doesn't exist.
+ */
+function get_image_size( $size ) {
+	$sizes = get_image_sizes();
+
+	if ( isset( $sizes[ $size ] ) ) {
+		return $sizes[ $size ];
+	}
+
+	return false;
 }
 
 /**

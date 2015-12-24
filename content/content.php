@@ -29,12 +29,15 @@
 		<?php edit_post_link( __( 'Edit', 'the-one' ), '<span class="edit-content">', '</span>' ); ?>
 
 	<?php else : // If not viewing a single post. ?>
+	<?php $has_medium_large = false !== TheOne\Inc\Functions\get_image_size( 'medium_large' ) ? true : false; ?>
+	<?php $image_size = $has_medium_large ? 'medium_large' : 'large'; ?>
+	<?php $image_size = apply_filters( 'theone_featured_image_size', $image_size ); ?>
 
 	<div class="preview" <?php post_class(); ?>>
 
 		<!-- Featured media ======================================== -->
 		<a href="<?php echo esc_url( get_permalink() ); ?>" class="featured-media">
-			<?php $post_thumbnail = get_the_image( array( 'size' => 'full', 'scan_raw' => true, 'scan' => true, 'link' => false, 'echo' => false ) ); ?>
+			<?php $post_thumbnail = get_the_image( array( 'size' => (string) $image_size, 'scan_raw' => true, 'scan' => true, 'link' => false, 'echo' => false ) ); ?>
 
 			<?php if ( !empty( $post_thumbnail ) ) : ?>
 
@@ -42,7 +45,8 @@
 
 			<?php else: ?>
 
-				<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/image-11.png" alt="<?php the_title(); ?>">
+				<!-- SVG 16:10 ratio http://codepen.io/shshaw/post/responsive-placeholder-image -->
+				<img src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 16 10'%2F%3E" alt="<?php the_title(); ?>">
 
 			<?php endif; ?>
 		</a><!-- .featured-media -->

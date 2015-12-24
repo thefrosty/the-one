@@ -1511,6 +1511,10 @@ img.alignright { /* See "Style Groups" for more alignment rules */
 			width: 100%;
 		}
 
+		a.featured-media {
+			position: relative;
+			z-index: 2;
+		}
 		.featured-media {
 			background: #d64431;
 		}

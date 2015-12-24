@@ -101,7 +101,7 @@
         $body.ajaxify();
 
         // Hook into State Changes
-        $window.bind('statechange', function () {
+        $window.bind('statechange', function() {
             // Prepare Variables
             var
                 State = History.getState(),
@@ -114,7 +114,7 @@
             // Start Fade Out
             // Animating to opacity to 0 still keeps the element's height intact
             // Which prevents that annoying pop bang issue when loading in new content
-            $content.animate({opacity:0},450, function(){
+            $content.animate({opacity:0},450, function() {
                 //Scroll to the top of ajax container
                 $('.loading').fadeIn(150);
                 $('html, body').animate({
@@ -220,11 +220,6 @@
                         window._gaq.push(['_trackPageview', relativeUrl]);
                     }
 
-                    // Inform ReInvigorate of a state change
-                    if (typeof window.reinvigorate !== 'undefined' && typeof window.reinvigorate.ajax_track !== 'undefined') {
-                        reinvigorate.ajax_track(url);
-                        // ^ we use the full url here as that is what reinvigorate supports
-                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     document.location.href = url;

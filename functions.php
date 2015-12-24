@@ -2,12 +2,14 @@
 
 namespace TheOne;
 
+use Hybrid;
+
 // Load the Hybrid Core framework and theme files.
 require_once( trailingslashit( get_template_directory() ) . 'core/hybrid.php' );
 require_once( trailingslashit( get_template_directory() ) . 'inc/Core.php' );
 
 // Launch the Hybrid Core framework.
-new \Hybrid();
+new Hybrid();
 
 // Do theme setup on the 'after_setup_theme' hook.
 add_action( 'after_setup_theme', __NAMESPACE__ . '\\theme_support', 6 );
