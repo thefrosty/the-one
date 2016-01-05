@@ -43,6 +43,7 @@ class Core {
 	private function actions() {
 
 		add_action( 'init', array( $this, 'register_nav_menu' ) );
+		add_action( 'wp', array( $this, 'conditional_checks' ) );
 		add_action( 'tgmpa_register', array( $this, 'tgmpa_register' ) );
 		add_action( 'widgets_init', array( $this, 'widgets_init' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -94,6 +95,16 @@ class Core {
 	 ****** ACTIONS ******
 	 *********************
 	 */
+
+	/**
+	 * Adding actions and filters if a conditional check is met.
+	 */
+	public function conditional_checks() {
+
+		if ( is_home() ) {
+			add_filter( 'hybrid_attr_post', array( $this, 'hybrid_attr_post' ) );
+		}
+	}
 
 	/**
 	 * Register navigation menus.
@@ -285,12 +296,47 @@ class Core {
 			$classes[] = 'single';
 		}
 
-		// Adds a class of group-blog to blogs with more than 1 published author.
+		// Adds a class of group-blog to sites with more than 1 published author.
 		if ( is_multi_author() ) {
 			$classes[] = 'group-blog';
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Filter the article attributes. This method adds the `has-post-thumbnail` class
+	 * to posts that have an image embedded or upload to the post. Normally this class is only added when
+	 * there is a "featured image" assigned.
+	 * This method is only called when `is_home()` is true.
+	 *
+	 * @param array $attr
+	 *
+	 * @return array
+	 */
+	public function hybrid_attr_post( $attr ) {
+
+		$post = get_post();
+
+		// Make sure we have a real post first.
+		if ( ! empty( $post ) ) {
+
+			$post_thumbnail = get_the_image( array(
+				'scan_raw' => true,
+				'scan'     => true,
+				'link'     => false,
+				'echo'     => false
+			) );
+
+			error_log( json_encode( get_post_class() ) );
+
+			if ( ! empty( $post_thumbnail ) && ! array_key_exists( 'has-post-thumbnail', get_post_class() ) ) {
+				$class           = array_merge( get_post_class(), array( 'has-post-thumbnail' ) );
+				$attr[ 'class' ] = join( ' ', $class ); // Add 'has-post-thumbnail'
+			}
+		}
+
+		return $attr;
 	}
 
 	/**

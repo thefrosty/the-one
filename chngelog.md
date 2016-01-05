@@ -6,7 +6,7 @@ You can see the changes made via the [commit log](https://github.com/thefrosty/T
 
 * Add missing PHPdocs to methods.
 * Implement PHP `use` in namespace classes.
-*
+* Fix duplicate HTML id `#content`.
 
 ## [1.2.1] - 2015-12-15
 

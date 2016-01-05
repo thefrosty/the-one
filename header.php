@@ -37,4 +37,4 @@
 
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
+	<div id="site-content" class="site-content">
