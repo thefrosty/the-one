@@ -13,7 +13,7 @@ class Core {
 	public static $theme_dir;
 	public static $theme_uri;
 
-	const THEME_VERSION = '1.2.2';
+	const THEME_VERSION = '1.2.2.1';
 	const THEME_NAME = 'the-one';
 	const THEME_PREFIX = 'theone_';
 
@@ -327,8 +327,6 @@ class Core {
 				'link'     => false,
 				'echo'     => false
 			) );
-
-			error_log( json_encode( get_post_class() ) );
 
 			if ( ! empty( $post_thumbnail ) && ! array_key_exists( 'has-post-thumbnail', get_post_class() ) ) {
 				$class           = array_merge( get_post_class(), array( 'has-post-thumbnail' ) );

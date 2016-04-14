@@ -2,6 +2,10 @@
 
 You can see the changes made via the [commit log](https://github.com/thefrosty/The-One-Theme/commits/master) for the latest release.
 
+## [1.2.2.1] - 2016-04-14
+
+* Fixes version conflicts.
+
 ## [1.2.2] - 2015-12-23
 
 * Add missing PHPdocs to methods.
