@@ -13,9 +13,11 @@ class Core {
 	public static $theme_dir;
 	public static $theme_uri;
 
-	const THEME_VERSION = '1.2.2.1';
+	const THEME_VERSION = '1.2.3';
 	const THEME_NAME = 'the-one';
 	const THEME_PREFIX = 'theone_';
+    const JETPACK_PRIORITY = 1001;
+    const JS_OBJECT_NAME = self::THEME_PREFIX . 'vars';
 
 	/**
 	 * Setup the theme.
@@ -56,12 +58,24 @@ class Core {
 	 */
 	private function filters() {
 
-		add_filter( 'body_class', array( $this, 'body_class' ) );
+        if ( $this->jetpack_tiled_gallery_is_active() ) {
+            add_filter( 'post_gallery', array( $this, 'jetpack_gallery_shortcode' ), ( self::JETPACK_PRIORITY + 1 ) );
+        }
+        add_filter( 'body_class', array( $this, 'body_class' ) );
 		add_filter( 'excerpt_length', array( $this, 'excerpt_length' ) );
 		add_filter( 'excerpt_more', array( $this, 'excerpt_more' ) );
 		add_filter( 'widget_text', 'do_shortcode' );
 		add_filter( 'hybrid_site_title', array( $this, 'hybrid_site_title') );
 	}
+
+    /**
+     * Is there a Jetpack, and is the 'Titled Gallery' module active.
+     *
+     * @return bool
+     */
+    private function jetpack_tiled_gallery_is_active() {
+        return method_exists( 'Jetpack', 'is_module_active' ) && \Jetpack::is_module_active( 'tiled-gallery' );
+    }
 
 	/**
 	 * Include our required files.
@@ -209,6 +223,9 @@ class Core {
 	 */
 	public function enqueue_scripts() {
 
+        $localize_array = array( 'jetpack_tiled_gallery_js' => '' );
+        $script_deps = array( 'jquery' );
+
 		/* Load active theme's style.css. */
 		wp_enqueue_style( is_child_theme() ? 'child-style' : 'style', get_stylesheet_uri(), array() );
 
@@ -235,10 +252,23 @@ class Core {
 		wp_register_script( 'ajaxify', self::$theme_uri . 'js/ajaxify.js', array( 'jquery', 'history-js' ), '1.0.1', true );
 
 		/* Underscores skip link fix */
-		wp_enqueue_script( 'skip-link-focus-fix', self::$theme_uri . 'js/skip-link-focus-fix.js', array(), '20151029', true );
+		wp_enqueue_script( 'skip-link-focus-fix', self::$theme_uri . 'js/skip-link-focus-fix.js', array( 'jquery' ), '20160607', true );
 
-		/* theme-specific scripts. */
-		wp_enqueue_script( self::THEME_NAME, self::$theme_uri . 'js/theme.js', array( 'jquery', 'ajaxify' ), self::THEME_VERSION, true );
+        /* if Jetpack 'Tiled Gallery' exists and is active */
+        if ( $this->jetpack_tiled_gallery_is_active() ) {
+            $localize_array['jetpack_tiled_gallery_js'] = plugins_url( 'modules/tiled-gallery/tiled-gallery/tiled-gallery.js', JETPACK__PLUGIN_FILE );
+        }
+
+        /* If Ajaxify is on, load it! */
+        if ( get_theme_mod( 'theone_ajaxify' ) ) {
+            $script_deps[] = 'ajaxify';
+        }
+
+        /* theme-specific scripts. */
+        wp_register_script( self::THEME_NAME, self::$theme_uri . 'js/theme.js', $script_deps, self::THEME_VERSION, true );
+        wp_localize_script( self::THEME_NAME, self::JS_OBJECT_NAME, $localize_array );
+
+        wp_enqueue_script( self::THEME_NAME );
 
 		/* Comment reply */
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -282,6 +312,25 @@ class Core {
 	 ****** FILTERS ******
 	 *********************
 	 */
+
+    /**
+     * Dequeue our script, and enqueue it in a higher (later) priority.
+     *
+     * @param string $content
+     *
+     * @return string
+     */
+    public function jetpack_gallery_shortcode( $content ) {
+        wp_dequeue_script( self::THEME_NAME );
+
+        add_action( current_filter(), function( $content ) {
+            wp_enqueue_script( self::THEME_NAME );
+
+            return $content;
+        }, ( self::JETPACK_PRIORITY + 3 ) );
+
+        return $content;
+    }
 
 	/**
 	 * Filter the body class.

@@ -2,6 +2,13 @@
 
 You can see the changes made via the [commit log](https://github.com/thefrosty/The-One-Theme/commits/master) for the latest release.
 
+## [1.2.3] - 2016-06-07
+
+* Cleanup theme.js
+* Update skip-link-focus.fix.js to recent _s version.
+* Fixed sanitization of theme settings checkboxes. Works now. :)
+* Added setting in Customize > General to toggle Ajaxify on/off.
+
 ## [1.2.2.1] - 2016-04-14
 
 * Fixes version conflicts.

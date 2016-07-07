@@ -118,19 +118,33 @@ function theone_customize_register( $wp_customize ) {
 			'priority' => 1,
 		) );
 
-	/**
-	 * Cleaner Gallery toggle
-	 */
-	$wp_customize->add_setting( 'theone_cleaner_gallery', array(
-		'default' => 0,
-		'sanitize_callback' => 'theone_sanitize_checkbox',
-	) );
-	$wp_customize->add_control( 'theone_cleaner_gallery', array(
-		'label' => __( 'Use Hybrid Core cleaner gallery', 'the-one' ),
-		'type' => 'checkbox',
-		'section' => 'theone_section_general',
-		'priority' => 1,
-	) );
+    /**
+     * Cleaner Gallery toggle
+     */
+    $wp_customize->add_setting( 'theone_cleaner_gallery', array(
+        'default' => 0,
+        'sanitize_callback' => 'theone_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'theone_cleaner_gallery', array(
+        'label' => __( 'Use Hybrid Core cleaner gallery', 'the-one' ),
+        'type' => 'checkbox',
+        'section' => 'theone_section_general',
+        'priority' => 1,
+    ) );
+
+    /**
+     * Ajaxify toggle
+     */
+    $wp_customize->add_setting( 'theone_ajaxify', array(
+        'default' => 1,
+        'sanitize_callback' => 'theone_sanitize_checkbox',
+    ) );
+    $wp_customize->add_control( 'theone_ajaxify', array(
+        'label' => __( 'Turn on Axaxify', 'the-one' ),
+        'type' => 'checkbox',
+        'section' => 'theone_section_general',
+        'priority' => 1,
+    ) );
 
 	/**
 	 * Search form toggle

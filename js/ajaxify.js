@@ -1,12 +1,12 @@
 // Ajaxify
 // v1.0.1 - 30 September, 2012
+// Update 2016-06-07 | Austin Passy
 // https://github.com/browserstate/ajaxify
-(function (window, undefined) {
+(function ($, window, undefined) {
 
     // Prepare our Variables
     var
         History = window.History,
-        $ = window.jQuery,
         document = window.document;
 
     // Check to see if History.js is enabled for our Browser
@@ -35,7 +35,8 @@
                 scrollTo: $(contentSelector),
                 duration: 450,
                 easing: 'swing'
-            };
+            },
+            $theone_vars = window.theone_vars !== 'undefined' ? window.theone_vars : {};
 
         // Ensure Content
         if ($content.length === 0) {
@@ -229,6 +230,24 @@
 
         }); // end onStateChange
 
+      $(window).on(completedEventName, function() {
+        $(document).trigger('ready');
+        $body.trigger('post-load'); // Trigger Jetpack Titled Galleries re-load
+        //if ($theone_vars.jetpack_tiled_gallery_js !== '') {
+        //  $.getScript($theone_vars.jetpack_tiled_gallery_js)
+        //    .done( function( script, textStatus ) {
+        //
+        //      console.log(script.TiledGalleryCollection());
+        //      if (typeof TiledGalleryCollection !== 'undefined') {
+        //        var tiledGalleries = new TiledGalleryCollection();
+        //        console.log( 'hello titled galleries' );
+        //
+        //        tiledGalleries.findAndSetupNewGalleries();
+        //      }
+        //    });
+        //}
+      });
+
     }); // end onDomLoad
 
-})(window); // end closure
+})(window.jQuery, window); // end closure

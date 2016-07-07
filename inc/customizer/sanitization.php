@@ -3,10 +3,12 @@
 /**
  * Sanitize checkboxes.
  *
+ * @param mixed $input
+ *
  * @return bool
  */
 function theone_sanitize_checkbox( $input ) {
-	return $input === 1 ?: 0;
+	return absint( $input ) === 1 ? 1 : 0;
 }
 
 /**
