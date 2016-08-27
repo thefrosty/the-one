@@ -20,6 +20,7 @@ function theone_sanitize_checkbox( $input ) {
 function theone_sanitize_choices( $input, $setting ) {
 	global $wp_customize;
 
+    /** @var WP_Customize_Manager $wp_customize */
 	$control = $wp_customize->get_control( $setting->id );
 
 	if ( array_key_exists( $input, $control->choices ) ) {
@@ -37,6 +38,7 @@ function theone_sanitize_choices( $input, $setting ) {
 function theone_sanitize_multiple_choices( $input, $setting ) {
 	global $wp_customize;
 
+    /** @var WP_Customize_Manager $wp_customize */
 	$control = $wp_customize->get_control( $setting->id );
 	
 	/*

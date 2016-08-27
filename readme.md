@@ -20,7 +20,7 @@ WordPress: 4.3 | PHP: 5.5
 Each theme setting/option will have a description explaining what it does and how to use it.
 
 Due to time constraints, free support is not available for this theme. Guaranteed and professional support for a full
-year is available for purchase at http://theonetheme.com/
+year is available for purchase at ~~http://theonetheme.com/~~
 
 Pull requests welcome on GitHub.
 

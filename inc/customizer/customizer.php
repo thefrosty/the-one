@@ -26,7 +26,7 @@ function theone_load_custom_controls() {
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function theone_customize_register( $wp_customize ) {
+function theone_customize_register( WP_Customize_Manager $wp_customize ) {
 
 	/**
 	 * TABLE OF CONTENTS:
@@ -143,7 +143,7 @@ function theone_customize_register( $wp_customize ) {
         'label' => __( 'Turn on Axaxify', 'the-one' ),
         'type' => 'checkbox',
         'section' => 'theone_section_general',
-        'priority' => 1,
+        'priority' => 2,
     ) );
 
 	/**
