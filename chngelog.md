@@ -2,6 +2,10 @@
 
 You can see the changes made via the [commit log](https://github.com/thefrosty/The-One-Theme/commits/master) for the latest release.
 
+## [1.3.0] - 2017-01-22
+
+* Update GitHub URL location.
+
 ## [1.2.4] - 2016-08-26
 
 * Update customizer Ajaxify on/off setting missing due to priority.

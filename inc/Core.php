@@ -13,7 +13,7 @@ class Core {
 	public static $theme_dir;
 	public static $theme_uri;
 
-	const THEME_VERSION = '1.2.4';
+	const THEME_VERSION = '1.3.0';
 	const THEME_NAME = 'the-one';
 	const THEME_PREFIX = 'theone_';
     const JETPACK_PRIORITY = 1001;
